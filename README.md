@@ -6,6 +6,8 @@ Sistema de extração e monitoramento de **eventos do Google Calendar** e **tare
 
 O Apps Script consolida os itens das duas fontes em uma única planilha. Cada registro recebe uma origem explícita, um tipo, um identificador estável e um status, permitindo que o AppSheet trate eventos e tarefas no mesmo fluxo de conferência.
 
+A integração com o Google Tasks é feita por chamadas REST autenticadas com `UrlFetchApp` e `ScriptApp.getOAuthToken()`. Dessa forma, o projeto não depende de o item **Tasks API** aparecer na lista de serviços avançados do Apps Script.
+
 | Fonte | Tipo exibido | Data usada na ordenação | Regra padrão |
 |---|---|---|---|
 | Google Calendar | Evento único ou Evento recorrente | Início do evento | Eventos dentro do ciclo configurado |
@@ -30,17 +32,27 @@ A primeira linha é mantida pelo script com os cabeçalhos abaixo:
 
 O campo `ID` usa os prefixos `EVENTO|` e `TAREFA|` para evitar colisões entre as fontes.
 
-## Configuração
+## Configuração no Apps Script
 
-### 1. Google Sheets e Apps Script
+### 1. Copiar os dois arquivos
 
-Prepare a planilha que será usada pelo AppSheet. No editor do Apps Script, copie os arquivos `auditoria.gs` e `appsscript.json` deste repositório. O manifesto já declara o serviço avançado `Tasks` e os escopos necessários.
+Abra o [repositório do projeto](https://github.com/kaffazigservicos-mei/auditoria_agenda) e copie o conteúdo completo de:
 
-### 2. Ativar o Google Tasks API
+- `auditoria.gs` para o arquivo `.gs` do Apps Script;
+- `appsscript.json` para o arquivo de manifesto do projeto.
 
-No projeto do Google Cloud associado ao Apps Script, ative a **Google Tasks API**. No editor do Apps Script, confirme também que o serviço avançado **Tasks API** aparece em **Serviços**. A documentação oficial descreve essa configuração em [Tasks Service | Apps Script](https://developers.google.com/apps-script/advanced/tasks) e no [quickstart do Google Tasks para Apps Script](https://developers.google.com/workspace/tasks/quickstart/apps-script).
+No editor do Apps Script, a opção **Mostrar arquivo de manifesto `appsscript.json` no editor** deve estar marcada em **Configurações do projeto**. O manifesto não deve conter `enabledAdvancedServices` nem exigir que `Tasks API` seja adicionado em **Serviços**.
 
-### 3. Ajustar o ciclo de auditoria
+O manifesto atual declara os seguintes escopos:
+
+```json
+"https://www.googleapis.com/auth/calendar.readonly",
+"https://www.googleapis.com/auth/tasks.readonly",
+"https://www.googleapis.com/auth/spreadsheets",
+"https://www.googleapis.com/auth/script.external_request"
+```
+
+### 2. Ajustar o ciclo de auditoria
 
 No início de `auditoria.gs`, altere as datas conforme o ciclo desejado:
 
@@ -57,33 +69,52 @@ var CONFIG = {
 
 A data final é exclusiva. Para auditar todo o ano de 2027, por exemplo, use `2027-01-01` como início e `2028-01-01` como fim.
 
-### 4. Executar a sincronização
+### 3. Executar a sincronização
 
-Salve o projeto, execute `exportarAgendaAuditoria` pela primeira vez e conceda as permissões solicitadas. Depois, recarregue a planilha para visualizar o menu **⚙️ Sincronizar → Atualizar agenda e tarefas**.
+Depois de colar e salvar os dois arquivos, selecione a função `exportarAgendaAuditoria` no alto do editor e clique em **Executar**. Na primeira execução, conceda as permissões solicitadas, incluindo a leitura das tarefas e o acesso a solicitações externas.
 
-Se a integração com o Google Tasks ainda não estiver habilitada, o script continua importando os eventos do Calendar e exibe um aviso indicando a configuração pendente.
+Não é necessário adicionar **Tasks API** em **Serviços**. O código usa diretamente os endpoints oficiais:
 
-### 5. Atualizar o AppSheet
+- `GET https://tasks.googleapis.com/tasks/v1/users/@me/lists`;
+- `GET https://tasks.googleapis.com/tasks/v1/lists/{tasklist}/tasks`.
 
-No AppSheet, atualize a estrutura da fonte de dados para reconhecer as colunas novas. Configure a visualização Deck usando `Título` como campo principal e, se desejado, mostre `Tipo`, `Origem`, `Lista`, `Início` e `Status` como informações secundárias. As visualizações existentes podem continuar filtrando por status e agora também poderão filtrar por `Origem` ou `Tipo`.
+Se ocorrer uma mensagem de API desativada ou acesso negado, copie a mensagem completa do registro de execução. Ela indicará se a conta ou o administrador do Google Workspace bloqueia a Google Tasks API.
 
 ## Regras de tarefas
 
 O script percorre todas as listas do usuário e trata a paginação da API. Tarefas excluídas não são importadas. Tarefas com prazo fora do ciclo são ignoradas. Tarefas sem prazo são incluídas quando `INCLUIR_TAREFAS_SEM_PRAZO` está como `true`, ficando ao final da ordenação. Tarefas concluídas são incluídas quando `INCLUIR_TAREFAS_CONCLUIDAS` está como `true`.
+
+## Atualizar o AppSheet
+
+Depois que as colunas aparecerem no Google Sheets, abra **Data → Tables**, selecione a tabela e clique em **Regenerate structure** ou **Regenerate schema**. Em seguida, crie Slices usando:
+
+```appsheet
+AND([Tipo] = "Tarefa", [Status] = "Pendente")
+```
+
+para tarefas pendentes, e:
+
+```appsheet
+AND([Tipo] = "Tarefa", [Status] = "Concluída")
+```
+
+para tarefas concluídas.
 
 ## Arquivos
 
 | Arquivo | Finalidade |
 |---|---|
 | `auditoria.gs` | Extração, consolidação, ordenação e gravação de eventos e tarefas |
-| `appsscript.json` | Fuso horário, serviço avançado Tasks e escopos OAuth |
+| `appsscript.json` | Escopos OAuth, fuso horário e acesso a requisições externas |
 | `README.md` | Instalação, configuração e regras de uso |
 
 ## Manutenção do ciclo
 
 A janela de datas é deliberadamente explícita para controlar desempenho e manter o AppSheet concentrado no ciclo atual. Ao iniciar um novo ano, atualize `DATA_INICIO` e `DATA_FIM`, salve o script e execute novamente a sincronização.
 
-## Referências
+## Referências oficiais
 
-[1]: https://developers.google.com/apps-script/advanced/tasks "Tasks Service | Apps Script"
-[2]: https://developers.google.com/workspace/tasks/quickstart/apps-script "Google Apps Script quickstart | Google Tasks"
+[1]: https://developers.google.com/workspace/tasks/auth "Choose Google Tasks API scopes"
+[2]: https://developers.google.com/workspace/tasks/reference/rest/v1/tasklists/list "Method: tasklists.list"
+[3]: https://developers.google.com/apps-script/guides/services/external "External APIs | Apps Script"
+[4]: https://developers.google.com/apps-script/reference/script/script-app#getoauthtoken "ScriptApp.getOAuthToken()"

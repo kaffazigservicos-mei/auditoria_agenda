@@ -3,6 +3,9 @@
  *
  * Consolida eventos do Google Calendar e itens do Google Tasks em uma única
  * tabela do Google Sheets para consumo pelo AppSheet.
+ *
+ * A integração com o Google Tasks usa a API REST diretamente, porque o serviço
+ * avançado Tasks não está disponível em todos os projetos Apps Script.
  */
 
 var CONFIG = {
@@ -13,6 +16,8 @@ var CONFIG = {
   INCLUIR_TAREFAS_CONCLUIDAS: true,
   TASKS_MAX_RESULTS: 100
 };
+
+var TASKS_API_BASE_URL = 'https://tasks.googleapis.com/tasks/v1';
 
 var CABECALHOS = [
   'Título',
@@ -27,9 +32,6 @@ var CABECALHOS = [
 
 /**
  * Importa os eventos do calendário e as tarefas do Google Tasks.
- *
- * O serviço avançado Tasks precisa estar habilitado no projeto do Apps Script
- * e a Google Tasks API precisa estar ativada no projeto do Google Cloud.
  */
 function exportarAgendaAuditoria() {
   var planilha = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -95,7 +97,6 @@ function exportarAgendaAuditoria() {
     return item.linha;
   });
 
-  // Mantém o esquema esperado pelo AppSheet e remove a carga anterior.
   planilha.getRange(1, 1, 1, CABECALHOS.length).setValues([CABECALHOS]);
   if (planilha.getLastRow() > 1) {
     planilha.getRange(2, 1, planilha.getLastRow() - 1, CABECALHOS.length).clearContent();
@@ -122,10 +123,6 @@ function exportarAgendaAuditoria() {
  * Tarefas sem prazo são incluídas por padrão para não desaparecerem do app.
  */
 function extrairTarefas_(fusoHorario) {
-  if (typeof Tasks === 'undefined') {
-    throw new Error('O serviço avançado Tasks ainda não foi habilitado no Apps Script.');
-  }
-
   var registros = [];
   var listas = listarTodasAsListas_();
 
@@ -173,13 +170,38 @@ function extrairTarefas_(fusoHorario) {
   return registros;
 }
 
-/** Lista todas as listas de tarefas, tratando paginação da API. */
+/**
+ * Faz uma requisição GET autenticada à Google Tasks API REST.
+ * O token pertence ao usuário que executa o Apps Script.
+ */
+function consultarTasksApi_(caminho, parametros) {
+  var url = TASKS_API_BASE_URL + caminho + montarQueryString_(parametros);
+  var resposta = UrlFetchApp.fetch(url, {
+    method: 'get',
+    headers: {
+      Authorization: 'Bearer ' + ScriptApp.getOAuthToken()
+    },
+    muteHttpExceptions: true
+  });
+  var codigo = resposta.getResponseCode();
+  var texto = resposta.getContentText();
+  var corpo = texto ? JSON.parse(texto) : {};
+
+  if (codigo < 200 || codigo >= 300) {
+    var detalhe = corpo.error && corpo.error.message ? corpo.error.message : texto;
+    throw new Error('Google Tasks API (' + codigo + '): ' + detalhe);
+  }
+
+  return corpo;
+}
+
+/** Lista todas as listas de tarefas, tratando paginação da API REST. */
 function listarTodasAsListas_() {
   var listas = [];
   var pageToken;
 
   do {
-    var resposta = Tasks.Tasklists.list({
+    var resposta = consultarTasksApi_('/users/@me/lists', {
       maxResults: CONFIG.TASKS_MAX_RESULTS,
       pageToken: pageToken
     });
@@ -192,15 +214,16 @@ function listarTodasAsListas_() {
   return listas;
 }
 
-/** Lista todos os itens de uma lista de tarefas, tratando paginação da API. */
+/** Lista todos os itens de uma lista, tratando paginação da API REST. */
 function listarTodasAsTarefasDaLista_(taskListId) {
   var tarefas = [];
   var pageToken;
 
   do {
-    var resposta = Tasks.Tasks.list(taskListId, {
+    var resposta = consultarTasksApi_('/lists/' + encodeURIComponent(taskListId) + '/tasks', {
       maxResults: CONFIG.TASKS_MAX_RESULTS,
       showCompleted: CONFIG.INCLUIR_TAREFAS_CONCLUIDAS,
+      showDeleted: true,
       showHidden: true,
       pageToken: pageToken
     });
@@ -213,16 +236,25 @@ function listarTodasAsTarefasDaLista_(taskListId) {
   return tarefas;
 }
 
-/**
- * Formata eventos como texto para preservar o padrão usado pela planilha.
- */
+function montarQueryString_(parametros) {
+  var partes = [];
+  var chaves = Object.keys(parametros || {});
+  for (var i = 0; i < chaves.length; i++) {
+    var chave = chaves[i];
+    var valor = parametros[chave];
+    if (valor !== undefined && valor !== null && valor !== '') {
+      partes.push(encodeURIComponent(chave) + '=' + encodeURIComponent(String(valor)));
+    }
+  }
+  return partes.length > 0 ? '?' + partes.join('&') : '';
+}
+
 function formatarData_(data, fusoHorario) {
   return "'" + Utilities.formatDate(data, fusoHorario, 'dd/MM/yyyy HH:mm');
 }
 
 /**
  * Formata o vencimento da tarefa sem deslocar o dia por causa do fuso horário.
- * A API do Tasks costuma retornar prazos como datas em UTC sem horário útil.
  */
 function formatarPrazoDeTarefa_(valorRFC3339, fusoHorario) {
   var dataISO = String(valorRFC3339).substring(0, 10);
