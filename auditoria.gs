@@ -288,7 +288,7 @@ function obterMensagemErro_(erro) {
 /** Cria o menu personalizado na planilha. */
 function onOpen() {
   SpreadsheetApp.getUi()
-    .createMenu('⚙️ Sincronizar')
+    .createMenu('Sincronizar')
     .addItem('Atualizar agenda e tarefas', 'exportarAgendaAuditoria')
     .addToUi();
 }
