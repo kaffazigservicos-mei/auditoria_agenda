@@ -64,7 +64,7 @@ function exportarAgendaAuditoria() {
         evento.isRecurringEvent() ? 'Evento recorrente' : 'Evento único',
         'Google Agenda',
         '',
-        'EVENTO|' + evento.getId(),
+        'EVENTO|' + evento.getId() + '|' + inicio.getTime(),
         'Pendente'
       ]
     });
