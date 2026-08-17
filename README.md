@@ -34,7 +34,7 @@ A aba institucional `Sobre` pode conter:
 
 | ID | Título | Descrição | Crédito |
 |---:|---|---|---|
-| 1 | Auditoria Agenda | Eventos e tarefas em um só lugar | Criado por Kaffa Zig Gestão com IAs |
+| 1 | Auditoria Agenda | Eventos e tarefas em um só lugar | Preencher com o nome de quem criou o app |
 
 ## Instalação no Apps Script
 
@@ -136,7 +136,7 @@ Inclua a coluna `ID` em todas as Slices, pois ela é a chave da tabela principal
 
 ### Tela Sobre o app
 
-Adicione a aba `Sobre` como uma tabela no AppSheet e crie uma View do tipo `Detail` chamada `Sobre o app`. Mostre somente `Título`, `Descrição` e `Crédito`.
+Adicione a aba `Sobre` como uma tabela no AppSheet e crie uma View do tipo `Detail` chamada `Sobre o app`. Mostre somente `Título`, `Descrição` e `Crédito`. O campo `Crédito` deve ser preenchido pelo próprio criador do aplicativo, por exemplo `Criado por [nome do criador]`. Não use uma atribuição fixa à Kaffa Zig.
 
 A conta Google exibida no menu nativo do AppSheet é parte da sessão autenticada da plataforma e não pode ser substituída pelo branding. O crédito personalizado deve aparecer na View `Sobre o app` ou em uma tela institucional própria.
 
@@ -175,6 +175,8 @@ Use a capa no campo de imagem de abertura/marca e o ícone no campo de logo. A t
 | `README.md` | Visão geral e referência rápida |
 | `GUIA_INICIO.md` | Passo a passo de instalação e uso |
 | `APRESENTACAO_LINKEDIN.md` | Texto pronto para publicação no LinkedIn |
+| `apresentacao_filminho.md` | Roteiro textual da apresentação em slides |
+| `apresentacao_filminho/` | Projeto visual da apresentação em formato filminho |
 | `test_auditoria_tasks_rest.js` | Teste isolado da integração REST |
 | `capa_auditoria_agenda_16x9.png` | Capa visual horizontal |
 | `capa_auditoria_agenda_safe.png` | Capa visual quadrada segura |

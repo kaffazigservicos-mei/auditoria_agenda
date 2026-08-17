@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "title": "Auditoria Agenda",
+    "created": 1786983317.396,
+    "last_updated": 1786983547.629,
+    "total_slides": 8
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "slide1",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "slide2",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "slide3",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "slide4",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "slide5",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "slide6",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "slide7",
+      "state": "edited",
+      "pageNum": 8
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Auditoria Agenda",
+      "summary": "Capa com o título, subtítulo e o rodapé institucional da identidade visual da capa.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide1",
+      "title": "A rotina começa dispersa",
+      "summary": "Eventos no Google Calendar e tarefas no Google Tasks aparecem separados, dificultando uma visão única do dia.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide2",
+      "title": "Uma sincronização conecta tudo",
+      "summary": "O Apps Script consulta as duas fontes e o Google Sheets recebe uma estrutura padronizada.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide3",
+      "title": "Eventos e tarefas no mesmo lugar",
+      "summary": "A solução reúne eventos únicos, eventos recorrentes, tarefas com ou sem prazo e seus status.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide4",
+      "title": "A organização acompanha a rotina",
+      "summary": "Slices e Views do AppSheet separam eventos, tarefas pendentes e tarefas concluídas.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide5",
+      "title": "Comece em poucos passos",
+      "summary": "Conectar, autorizar, sincronizar e abrir o AppSheet: o fluxo inicial para começar a usar.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide6",
+      "title": "Mais clareza para agir",
+      "summary": "A solução transforma dados dispersos em uma visão operacional simples para a próxima ação.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide7",
+      "title": "Auditoria Agenda",
+      "summary": "Encerramento com chamada para conhecer o projeto no GitHub e o rodapé institucional.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

@@ -23,9 +23,9 @@ Crie também, se desejar, uma aba chamada `Sobre` com a seguinte estrutura:
 
 | ID | Título | Descrição | Crédito |
 |---:|---|---|---|
-| 1 | Auditoria Agenda | Eventos e tarefas em um só lugar | Criado por Kaffa Zig Gestão com IAs |
+| 1 | Auditoria Agenda | Eventos e tarefas em um só lugar | Preencher com o nome de quem criou o app |
 
-A aba `Sobre` não deve ser usada como destino da sincronização. O código atual procura a aba `Página1` pelo nome, independentemente da aba que estiver aberta no momento da execução.
+A aba `Sobre` não deve ser usada como destino da sincronização. O código atual procura a aba `Página1` pelo nome, independentemente da aba que estiver aberta no momento da execução. O campo `Crédito` é preenchido pelo criador do aplicativo e deve usar o nome real de quem desenvolveu ou configurou aquela instalação.
 
 ## 2. Copiar os arquivos para o Apps Script
 
