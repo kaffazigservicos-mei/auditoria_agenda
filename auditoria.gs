@@ -119,7 +119,12 @@ function exportarAgendaAuditoria() {
   }
   mensagem += avisoTarefas;
 
-  SpreadsheetApp.getUi().alert(mensagem);
+  try {
+    planilha.toast(mensagem, 'Auditoria Agenda', 10);
+  } catch (erroUi) {
+    console.log(mensagem);
+  }
+  return mensagem;
 }
 
 /**
