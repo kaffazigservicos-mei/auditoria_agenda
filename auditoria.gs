@@ -14,7 +14,8 @@ var CONFIG = {
   DATA_FIM: new Date('2027-01-01T00:00:00Z'),
   INCLUIR_TAREFAS_SEM_PRAZO: true,
   INCLUIR_TAREFAS_CONCLUIDAS: true,
-  TASKS_MAX_RESULTS: 100
+  TASKS_MAX_RESULTS: 100,
+  SHEET_NAME: 'Página1'
 };
 
 var TASKS_API_BASE_URL = 'https://tasks.googleapis.com/tasks/v1';
@@ -34,7 +35,10 @@ var CABECALHOS = [
  * Importa os eventos do calendário e as tarefas do Google Tasks.
  */
 function exportarAgendaAuditoria() {
-  var planilha = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var planilha = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONFIG.SHEET_NAME);
+  if (!planilha) {
+    throw new Error('A aba de dados "' + CONFIG.SHEET_NAME + '" não foi encontrada. Verifique o nome da aba principal.');
+  }
   var fusoHorario = Session.getScriptTimeZone() || 'America/Sao_Paulo';
   var itens = [];
   var quantidadeEventos = 0;
