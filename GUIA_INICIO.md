@@ -1,111 +1,138 @@
-# Guia inicial da Auditoria Agenda
+# Guia inicial — Auditoria Agenda
 
-Este guia descreve o caminho mínimo para instalar, autorizar e usar a Auditoria Agenda com Google Sheets, Google Apps Script, Google Calendar, Google Tasks e AppSheet.
+Este guia descreve a instalação, a autorização e o uso da Auditoria Agenda com Google Sheets, Google Apps Script, Google Calendar, Google Tasks e AppSheet. A versão atual possui **sincronização bidirecional**: importa alterações feitas nas fontes Google e envia de volta alterações feitas pelo AppSheet na aba `Página1`.
 
-## Visão geral
-
-A solução importa eventos do Google Calendar e tarefas do Google Tasks para a aba `Página1` de uma planilha. A aba `Sobre` é independente e deve conter somente as informações institucionais do aplicativo. O AppSheet lê essas abas e apresenta os dados em telas separadas.
+## 1. Como o fluxo funciona
 
 | Componente | Função |
 |---|---|
-| Google Calendar | Fonte de eventos únicos e recorrentes |
-| Google Tasks | Fonte de tarefas pendentes e concluídas |
-| Apps Script | Consulta as fontes e consolida os registros |
-| Google Sheets | Armazena os dados na aba `Página1` |
-| AppSheet | Exibe, filtra e separa eventos e tarefas |
-| Google Cloud | Controla a API Tasks e as permissões OAuth |
+| Google Calendar | Fonte e destino de eventos únicos e recorrentes |
+| Google Tasks | Fonte e destino de tarefas pendentes e concluídas |
+| Apps Script | Compara a Página1 com o último snapshot, grava alterações nas fontes e importa o estado atualizado |
+| Google Sheets | Mantém a tabela operacional na aba `Página1` |
+| AppSheet | Permite consultar e editar eventos e tarefas no celular |
+| Google Cloud | Controla as APIs e as permissões OAuth |
 
-## 1. Preparar a planilha
+A sincronização usa `ID` como chave externa. Eventos usam o formato `EVENTO|id|início`; tarefas usam `TAREFA|lista|id`. A aba `Sobre` é independente e nunca é usada como destino dos dados operacionais.
 
-Crie ou utilize uma planilha vinculada à mesma conta Google que possui o calendário e as tarefas. Mantenha uma aba principal chamada exatamente `Página1`. Essa é a aba que o script atualiza automaticamente.
+## 2. Preparar a planilha
 
-Crie também, se desejar, uma aba chamada `Sobre` com a seguinte estrutura:
+Use uma planilha vinculada à mesma conta Google que possui o calendário e as tarefas. Mantenha uma aba principal chamada exatamente `Página1`.
+
+Crie, se desejar, uma aba `Sobre` com esta estrutura:
 
 | ID | Título | Descrição | Crédito |
 |---:|---|---|---|
 | 1 | Auditoria Agenda | Eventos e tarefas em um só lugar | Preencher com o nome de quem criou o app |
 
-A aba `Sobre` não deve ser usada como destino da sincronização. O código atual procura a aba `Página1` pelo nome, independentemente da aba que estiver aberta no momento da execução. O campo `Crédito` é preenchido pelo criador do aplicativo e deve usar o nome real de quem desenvolveu ou configurou aquela instalação.
+A aba `Sobre` deve conter somente informações institucionais. Se uma versão antiga do script inseriu dados nessa aba, apague as linhas extras e restaure a estrutura acima.
 
-## 2. Copiar os arquivos para o Apps Script
+## 3. Copiar os arquivos para o Apps Script
 
-No Apps Script aberto pela planilha, copie `auditoria.gs` para um arquivo terminado em `.gs`, como `Código.gs`, e copie `appsscript.json` para o arquivo de manifesto do projeto.
+Abra o Apps Script pela planilha e copie:
 
-O arquivo `auditoria.gs` é o código principal. O manifesto deve ser mantido como JSON válido e não deve conter `enabledAdvancedServices` nem depender da presença de `Tasks API` na lista de serviços avançados.
+| Arquivo | Destino |
+|---|---|
+| `auditoria.gs` | Arquivo de código terminado em `.gs`, como `Código.gs` |
+| `appsscript.json` | Arquivo de manifesto do projeto |
 
-A versão final do código possui estas características importantes:
+O manifesto atual não depende da presença de `Tasks API` na lista de serviços avançados. Ele usa chamadas REST autenticadas.
 
-- grava exclusivamente na aba `Página1`;
-- usa a Google Tasks API por chamadas REST autenticadas;
-- importa tarefas com e sem prazo, conforme a configuração;
-- importa tarefas concluídas quando `INCLUIR_TAREFAS_CONCLUIDAS` está como `true`;
-- cria chaves únicas para eventos recorrentes;
-- usa `toast` e log em vez de `SpreadsheetApp.getUi().alert`, evitando erro quando o script é executado sem interface aberta.
+## 4. Configurar o Google Cloud e o OAuth
 
-## 3. Configurar o Google Cloud e o OAuth
+Use a mesma conta Google que possui a planilha, o calendário e as tarefas. A conta do GitHub serve apenas para hospedar o código.
 
-Use a mesma conta Google que possui a planilha e as tarefas. A conta do GitHub não participa da autorização.
+Para uma conta pessoal, associe o Apps Script ao projeto Cloud que você controla, configure o aplicativo OAuth como **Externo**, adicione sua própria conta como usuário de teste e ative a Google Tasks API.
 
-Para uma conta pessoal, crie um projeto Cloud próprio e associe-o ao Apps Script. No projeto Cloud, configure o Google Auth Platform como aplicativo **Externo**, adicione a própria conta como usuário de teste e inclua os escopos necessários em **Data access**:
+Os escopos de escrita necessários são:
 
 ```text
-https://www.googleapis.com/auth/tasks.readonly
-https://www.googleapis.com/auth/calendar.readonly
+https://www.googleapis.com/auth/calendar
+https://www.googleapis.com/auth/tasks
 https://www.googleapis.com/auth/spreadsheets
+https://www.googleapis.com/auth/script.external_request
+https://www.googleapis.com/auth/script.scriptapp
 ```
 
-Ative a **Google Tasks API** no mesmo projeto Cloud. O `script.external_request` é uma permissão do Apps Script declarada no manifesto e não precisa ser procurada como um serviço separado.
+Na primeira execução, autorize novamente, pois a versão bidirecional substitui os escopos `readonly` por escopos de escrita.
 
-## 4. Executar a primeira sincronização
+## 5. Fazer a primeira sincronização
 
-No Apps Script, selecione `exportarAgendaAuditoria` e clique em **Executar**. Na primeira execução, autorize as permissões solicitadas.
+No Apps Script, selecione `exportarAgendaAuditoria` e clique em **Executar**. A primeira execução deve ser feita manualmente para autorizar a conta e criar o snapshot inicial.
 
-A sincronização deve preencher a linha de cabeçalho da `Página1` com:
+A `Página1` deverá conter:
 
 ```text
 Título | Início | Fim | Tipo | Origem | Lista | ID | Status
 ```
 
-Os registros de eventos terão `Origem = Google Agenda`. Os registros de tarefas terão `Origem = Google Tasks`. A execução pode ser feita com qualquer aba aberta, pois o destino é fixado no código como `Página1`.
+Os registros de eventos terão `Origem = Google Agenda`. Os registros de tarefas terão `Origem = Google Tasks`. A execução pode ocorrer com qualquer aba aberta, pois o destino é fixado como `Página1`.
 
-Depois da execução, confirme se a aba `Sobre` permaneceu sem registros de eventos ou tarefas. Se ela tiver sido contaminada por uma versão antiga do código, apague as linhas extras e restaure a linha institucional descrita na seção 1.
+É importante executar uma segunda vez somente depois de confirmar que os dados foram importados. O primeiro snapshot serve como base de comparação; alterações feitas depois disso serão enviadas às fontes.
 
-## 5. Configurar a tabela no AppSheet
+## 6. Ativar a sincronização automática
 
-No editor do AppSheet, acesse **Data → Tables**, selecione a tabela da `Página1` e clique em **Regenerate structure** ou **Regenerate schema**.
+Depois da primeira sincronização, execute uma vez a função:
+
+```text
+configurarSincronizacaoAutomatica
+```
+
+Essa função cria um gatilho de tempo de aproximadamente cinco minutos para executar `exportarAgendaAuditoria`. O gatilho é criado sob a conta que o configura; essa conta precisa ter acesso de escrita ao Calendar, Tasks e Sheets.
+
+O Apps Script também oferece gatilhos de edição, mas chamadas feitas por scripts ou APIs não disparam automaticamente um gatilho de edição. Por isso, nesta versão, o gatilho periódico é a opção mais previsível para detectar alterações do AppSheet.
+
+## 7. O que pode ser editado no AppSheet
+
+As alterações abaixo são enviadas de volta na próxima execução:
+
+| Tipo | Campos sincronizados |
+|---|---|
+| Tarefa existente | `Título`, `Início`/prazo e `Status` |
+| Evento existente | `Título`, `Início` e `Fim` |
+| Nova tarefa | `Título`, `Lista`, `Início`/prazo e `Status` |
+| Novo evento | `Título`, `Início`, `Fim` e `Tipo` |
+
+Para criar uma tarefa, o registro novo precisa ter `Tipo = Tarefa`, `Título` e uma `Lista` válida. Se a lista estiver vazia, o script usa a primeira lista do Google Tasks. Para escolher uma lista fixa, preencha `DEFAULT_TASK_LIST_ID` no objeto `CONFIG`.
+
+Para criar um evento, use `Tipo = Evento único`, preencha `Título` e `Início`; se `Fim` ficar vazio, será usado um intervalo padrão de uma hora.
+
+A exclusão de linhas não apaga automaticamente os objetos no Google. Essa proteção evita que uma exclusão acidental no celular destrua eventos ou tarefas. Para excluir na fonte, use o Calendar ou o Tasks diretamente.
+
+## 8. Configurar o AppSheet
+
+No editor do AppSheet, acesse **Data → Tables**, selecione a tabela ligada à `Página1` e clique em **Regenerate structure** ou **Regenerate schema**.
 
 Em **Data → Columns**, confirme:
 
 | Coluna | Configuração |
 |---|---|
-| `ID` | Tipo Text e coluna-chave (`Key`) |
-| `Título` | Tipo Text e coluna de rótulo (`Label`) |
-| `Início` | Date ou DateTime |
-| `Fim` | Date ou DateTime |
-| `Tipo` | Text |
-| `Origem` | Text |
-| `Lista` | Text |
-| `Status` | Text |
+| `ID` | Tipo `Text` e `Key` ligado |
+| `Título` | Tipo `Text` e `Label` ligado |
+| `Início` | `Date` ou `DateTime` |
+| `Fim` | `Date` ou `DateTime` |
+| `Tipo` | `Text` ou `Enum` |
+| `Origem` | `Text` |
+| `Lista` | `Text` |
+| `Status` | `Text` ou `Enum` com `Pendente` e `Concluída` |
 
-Se a tabela `Sobre` foi adicionada ao AppSheet, configure `ID` como chave e crie uma View do tipo `Detail` chamada `Sobre o app`. Mostre nessa tela apenas `Título`, `Descrição` e `Crédito`.
+Não configure uma fórmula que substitua o `ID` importado. Para linhas novas, o AppSheet pode usar `UNIQUEID()` como valor inicial; depois da sincronização o script importará o ID externo definitivo.
 
-## 6. Separar eventos e tarefas
+## 9. Criar as Slices e Views de status
 
-Crie uma Slice chamada `Eventos` com esta condição:
+Crie uma Slice `Eventos` com:
 
 ```appsheet
 OR([Tipo] = "Evento único", [Tipo] = "Evento recorrente")
 ```
 
-Inclua a coluna `ID` na lista de colunas da Slice.
-
-Crie uma Slice chamada `Tarefas` com:
+Crie uma Slice `Tarefas` com:
 
 ```appsheet
 [Tipo] = "Tarefa"
 ```
 
-Para separar os status, crie também:
+Crie as duas Slices de status:
 
 ```appsheet
 AND([Tipo] = "Tarefa", [Status] = "Pendente")
@@ -115,44 +142,46 @@ AND([Tipo] = "Tarefa", [Status] = "Pendente")
 AND([Tipo] = "Tarefa", [Status] = "Concluída")
 ```
 
-Depois acesse **UX → Views** e crie Views do tipo Deck ou Table para `Eventos`, `Tarefas`, `Tarefas pendentes` e `Tarefas concluídas`. Use `Título` como campo principal, `Início` como campo secundário e `Status` ou `Origem` como informação de resumo.
+Em todas as Slices inclua obrigatoriamente a coluna `ID`, pois ela é a chave da tabela principal. Em **UX → Views** ou **App → Views**, crie Views do tipo Deck ou Table para `Eventos`, `Tarefas`, `Tarefas pendentes` e `Tarefas concluídas`. Use `Título` como cabeçalho, `Início` como informação secundária e `Status` ou `Origem` como resumo.
 
-## 7. Personalizar a aparência
+## 10. Configurar a página Sobre
 
-Em **UX → Brand** ou **UX → Options**, carregue os assets finais do projeto:
+Adicione a aba `Sobre` como tabela no AppSheet e crie uma View do tipo `Detail` chamada `Sobre o app`. Mostre apenas `Título`, `Descrição` e `Crédito`. O campo `Crédito` deve ser preenchido pelo criador da instalação, por exemplo `Criado por [nome do criador]`.
 
-| Asset | Uso |
-|---|---|
-| `capa_auditoria_agenda_16x9.png` | Capa horizontal com área segura para recorte |
-| `capa_auditoria_agenda_safe.png` | Alternativa quadrada com margem interna ampla |
-| `icone_auditoria_agenda_final.png` | Logo ou ícone quadrado do aplicativo |
+A conta Google exibida no menu nativo do AppSheet pertence à sessão autenticada e não pode ser substituída pelo branding.
 
-A tela de abertura nativa do AppSheet pode aparecer rapidamente e o seu tempo não é controlado pela imagem. Para manter uma apresentação institucional, use a View `Sobre o app` como primeira opção de navegação, quando essa organização estiver disponível no editor.
+## 11. Política de conflito
 
-## Dificuldades comuns e solução
+A sincronização trabalha com o último snapshot salvo pelo script. Se uma linha for alterada no AppSheet, essa versão será enviada à fonte na execução seguinte. Depois, a fonte será lida novamente e a `Página1` será reconstruída com o estado confirmado.
 
-| Dificuldade | Causa provável | Solução |
+Se alguém alterar diretamente Calendar ou Tasks antes da próxima execução, a alteração externa será importada. Se o AppSheet e a fonte forem alterados entre duas execuções, a alteração detectada na `Página1` será enviada nesta execução; por isso, evite editar simultaneamente o mesmo registro nos dois lugares.
+
+## 12. Dificuldades comuns
+
+| Problema | Causa provável | Solução |
 |---|---|---|
-| `Tasks API` não aparece em Serviços | O serviço avançado não está disponível no projeto | Não adicione o serviço; use o código REST desta versão |
-| API Tasks retorna 403 | A Google Tasks API está desativada no projeto Cloud | Ative a API no projeto associado e aguarde a propagação |
-| Solicitação de autorização OAuth | O script usa novos escopos ou mudou de projeto Cloud | Revise as permissões com a mesma conta dona da planilha |
-| Dados aparecem na aba `Sobre` | Código antigo usava a aba ativa como destino | Substitua pelo `auditoria.gs` final, que fixa `Página1` |
-| `Cannot call SpreadsheetApp.getUi()` | Execução sem interface gráfica | Use o arquivo final, que usa `toast` e log |
-| AppSheet não carrega | Fórmulas antigas referenciam colunas removidas | Atualize fórmulas para `[Título]`, `[Início]` e `[ID]` |
-| Slice não salva | A condição usa `Data de início` ou `Evento` | Use os nomes atuais e inclua `ID` na Slice |
-| Chaves duplicadas | Eventos recorrentes compartilhavam o mesmo ID | Execute o código final, que inclui o horário de início na chave |
-| Texto da capa é cortado | Imagem fora da área segura ou proporção inadequada | Use a versão 16:9 ou a versão quadrada com margem interna |
-| Conta Google aparece no menu | É o menu nativo da sessão do AppSheet | Não pode ser substituído pelo branding; use a View `Sobre o app` para o crédito |
+| AppSheet edita, mas Calendar/Tasks não mudam | Código antigo era somente leitura ou o gatilho não foi criado | Copie o `auditoria.gs` bidirecional e execute `configurarSincronizacaoAutomatica` |
+| Erro 403 ao atualizar | Escopo `calendar`/`tasks` ou API não autorizados | Reautorize o Apps Script e ative a Google Tasks API |
+| Tarefas não aparecem | Slice ou View não foi criada, ou `Status` tem valor diferente | Regenere a estrutura e use exatamente `Pendente`/`Concluída` |
+| Status muda no AppSheet, mas volta | O ciclo ainda não executou ou há edição simultânea | Aguarde a próxima execução e evite alterar o mesmo item em dois lugares |
+| Nova tarefa não é criada | `Tipo` ou `Lista` inválidos | Use `Tipo = Tarefa`, título e uma lista válida |
+| Nova tarefa aparece duplicada | O script foi executado duas vezes antes de importar o novo ID | Aguarde uma sincronização completa antes de repetir |
+| Evento não é atualizado | ID antigo, calendário diferente ou data inválida | Confirme `CALENDAR_ID`, `Início` e `Fim` |
+| Dados aparecem na aba `Sobre` | Código antigo usava a aba ativa | Use a versão que fixa `Página1` |
+| AppSheet não carrega | Fórmulas antigas referenciam nomes removidos | Use `[Título]`, `[Início]` e `[ID]` |
+| Texto da capa é cortado | Imagem fora da área segura | Use `capa_auditoria_agenda_16x9.png` ou `capa_auditoria_agenda_safe.png` |
 
-## 8. Manutenção
+## 13. Manutenção
 
-Para iniciar um novo ciclo de auditoria, altere `DATA_INICIO` e `DATA_FIM` no objeto `CONFIG` do `auditoria.gs`. A data final é exclusiva. Depois salve o código e execute novamente `exportarAgendaAuditoria`.
+Altere `DATA_INICIO` e `DATA_FIM` conforme o período que deseja auditar. A data final é exclusiva.
 
-Não edite manualmente os dados das colunas A:H da `Página1`, pois a sincronização limpa e reescreve essa carga. Mantenha informações institucionais somente na aba `Sobre`.
+Evite editar diretamente muitas linhas na `Página1`. Prefira o AppSheet para alterações individuais. Não apague linhas para excluir objetos Google, porque a exclusão automática está desativada por segurança.
+
+Se precisar interromper a automação, abra **Apps Script → Triggers** e exclua o gatilho de `exportarAgendaAuditoria`.
 
 ## Referências oficiais
 
-[1]: https://developers.google.com/workspace/tasks/auth "Choose Google Tasks API scopes"
-[2]: https://developers.google.com/workspace/tasks/reference/rest/v1/tasklists/list "Method: tasklists.list"
-[3]: https://developers.google.com/apps-script/guides/services/external "External APIs | Apps Script"
-[4]: https://developers.google.com/apps-script/reference/script/script-app#getoauthtoken "ScriptApp.getOAuthToken()"
+[1]: https://developers.google.com/workspace/calendar/api/v3/reference/events/patch "Google Calendar Events patch"
+[2]: https://developers.google.com/workspace/tasks/reference/rest "Google Tasks API REST reference"
+[3]: https://developers.google.com/apps-script/guides/triggers/installable "Installable triggers | Apps Script"
+[4]: https://developers.google.com/apps-script/guides/services/external "External APIs | Apps Script"
