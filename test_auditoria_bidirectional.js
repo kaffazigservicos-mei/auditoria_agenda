@@ -63,7 +63,7 @@ const sourceAssertions = [
   ['calendar event mutation', source.includes('evento.setTitle') && source.includes('evento.setTime')],
   ['calendar event creation', source.includes('calendario.createEvent')],
   ['time trigger', source.includes('.everyMinutes(5)')],
-  ['fixed Página1 destination', source.includes("SHEET_NAME: 'Página1'")],
+  ['fixed Página1 destination', source.includes("SHEET_NAME: 'Página1'") && source.includes('getSheetByName(CONFIG.SHEET_NAME)')],
   ['default task list option', source.includes('DEFAULT_TASK_LIST_ID')]
 ];
 for (const [name, ok] of sourceAssertions) {

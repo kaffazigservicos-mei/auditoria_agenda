@@ -117,7 +117,8 @@ function obterPlanilha_() {
  */
 function aplicarAlteracoesDaPagina_(planilha) {
   var snapshot = carregarSnapshot_();
-  var linhas = lerLinhasDaPagina_(planilha);
+  var aba = obterAbaPrincipal_(planilha);
+  var linhas = lerLinhasDaPagina_(aba);
   var resultado = {
     atualizados: 0,
     ignorados: 0,
@@ -307,6 +308,7 @@ function importarFontesParaPagina_(planilha) {
   if (!planilha) {
     throw new Error('A planilha não foi encontrada.');
   }
+  var aba = obterAbaPrincipal_(planilha);
 
   var fusoHorario = Session.getScriptTimeZone() || 'America/Sao_Paulo';
   var itens = [];
@@ -314,8 +316,8 @@ function importarFontesParaPagina_(planilha) {
   var quantidadeTarefas = 0;
   var avisoTarefas = '';
 
-  removerFiltro_(planilha);
-  garantirColunas_(planilha, CABECALHOS.length);
+  removerFiltro_(aba);
+  garantirColunas_(aba, CABECALHOS.length);
 
   var agenda = CalendarApp.getCalendarById(CONFIG.CALENDAR_ID);
   if (!agenda) {
@@ -361,14 +363,14 @@ function importarFontesParaPagina_(planilha) {
   });
 
   var dados = itens.map(function(item) { return item.linha; });
-  planilha.getRange(1, 1, 1, CABECALHOS.length).setValues([CABECALHOS]);
-  if (planilha.getLastRow() > 1) {
-    planilha.getRange(2, 1, planilha.getLastRow() - 1, CABECALHOS.length).clearContent();
+  aba.getRange(1, 1, 1, CABECALHOS.length).setValues([CABECALHOS]);
+  if (aba.getLastRow() > 1) {
+    aba.getRange(2, 1, aba.getLastRow() - 1, CABECALHOS.length).clearContent();
   }
   if (dados.length > 0) {
-    planilha.getRange(2, 1, dados.length, CABECALHOS.length).setValues(dados);
+    aba.getRange(2, 1, dados.length, CABECALHOS.length).setValues(dados);
   }
-  planilha.setFrozenRows(1);
+  aba.setFrozenRows(1);
 
   salvarSnapshot_(dados);
   return {
@@ -508,10 +510,18 @@ function montarQueryString_(parametros) {
   return partes.length > 0 ? '?' + partes.join('&') : '';
 }
 
-function lerLinhasDaPagina_(planilha) {
-  var ultimaLinha = planilha.getLastRow();
+function obterAbaPrincipal_(planilha) {
+  var aba = planilha.getSheetByName(CONFIG.SHEET_NAME);
+  if (!aba) {
+    throw new Error('A aba "' + CONFIG.SHEET_NAME + '" não foi encontrada na planilha.');
+  }
+  return aba;
+}
+
+function lerLinhasDaPagina_(aba) {
+  var ultimaLinha = aba.getLastRow();
   if (ultimaLinha < 2) return [];
-  var valores = planilha.getRange(2, 1, ultimaLinha - 1, CABECALHOS.length).getValues();
+  var valores = aba.getRange(2, 1, ultimaLinha - 1, CABECALHOS.length).getValues();
   return valores.map(function(valor, indice) {
     return {
       rowNumber: indice + 2,
