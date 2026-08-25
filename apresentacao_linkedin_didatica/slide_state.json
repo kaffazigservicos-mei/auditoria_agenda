@@ -1,0 +1,111 @@
+{
+  "project_info": {
+    "title": "Crie sua própria Auditoria Agenda",
+    "created": 1787682616.412,
+    "last_updated": 1787682822.824,
+    "total_slides": 9
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "slide1",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "slide2",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "slide3",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "slide4",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "slide5",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "slide6",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "slide7",
+      "state": "edited",
+      "pageNum": 8
+    },
+    {
+      "id": "slide8",
+      "state": "edited",
+      "pageNum": 9
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Crie sua própria Auditoria Agenda",
+      "summary": "Capa com título, subtítulo e rodapé institucional, mantendo a estética premium da apresentação anterior.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide1",
+      "title": "A rotina fica espalhada",
+      "summary": "Mostra o problema de acompanhar reuniões e tarefas em lugares diferentes, usando linguagem de gestão de projetos.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide2",
+      "title": "Uma visão única facilita a próxima ação",
+      "summary": "Explica o benefício de reunir compromissos e tarefas em uma rotina única, com foco em decisão e execução.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide3",
+      "title": "Você começa com o que já usa",
+      "summary": "Apresenta os recursos necessários em termos comuns: conta Google, Calendar, Tasks, Sheets e aplicativo no celular.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide4",
+      "title": "Primeiro, crie a base do projeto",
+      "summary": "Ensina os primeiros passos: criar a planilha, renomear a aba e copiar os arquivos do projeto.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide5",
+      "title": "Depois, autorize a sua própria conta",
+      "summary": "Explica a autorização do projeto com segurança e ressalva a limitação de login do plano gratuito do AppSheet.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide6",
+      "title": "Organize o trabalho por tipo e situação",
+      "summary": "Mostra a separação prática entre eventos, tarefas pendentes e tarefas concluídas, evitando jargões técnicos.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide7",
+      "title": "Salve, sincronize e continue acompanhando",
+      "summary": "Explica o uso do Sync no celular, o gatilho automático e a diferença entre a regra de 2026 e os próximos exercícios.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide8",
+      "title": "Auditoria Agenda: clareza para agir",
+      "summary": "Encerramento com chamada para o repositório no GitHub e o rodapé institucional.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

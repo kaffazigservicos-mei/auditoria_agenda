@@ -209,7 +209,8 @@ Para uma instalação passo a passo, inclusive para quem tem pouca familiaridade
 - [`GUIA_NOVO_USUARIO.md`](GUIA_NOVO_USUARIO.md) — roteiro didático desde a criação da planilha até o teste no celular.
 - [`GUIA_INICIO.md`](GUIA_INICIO.md) — guia operacional da instalação bidirecional.
 - [`APPSHEET_CONFIG_BIDIRECTIONAL.md`](APPSHEET_CONFIG_BIDIRECTIONAL.md) — configuração detalhada de Slices e Views.
-- [`apresentacao_linkedin/`](apresentacao_linkedin/) — apresentação premium em oito slides, pronta para apresentar ou publicar no LinkedIn.
+- [`apresentacao_linkedin_didatica/`](apresentacao_linkedin_didatica/) — nova apresentação didática em nove slides, com linguagem de gestão de projetos.
+- [`apresentacao_linkedin/`](apresentacao_linkedin/) — versão premium anterior, mantida como referência visual.
 
 ## Teste recomendado
 
@@ -254,7 +255,9 @@ Um repositório público contém o código, mas não concede automaticamente ace
 | `test_auditoria_bidirectional.js` | Testes da integração bidirecional |
 | `test_auditoria_write_mocks.js` | Testes simulados de escrita no Calendar e Tasks |
 | `README.md` | Referência rápida |
-| `apresentacao_linkedin/` | Apresentação premium em oito slides para o LinkedIn |
+| `apresentacao_linkedin_didatica/` | Nova apresentação didática em nove slides para o LinkedIn |
+| `APRESENTACAO_LINKEDIN_DIDATICA.md` | Roteiro textual da apresentação didática |
+| `apresentacao_linkedin/` | Apresentação premium anterior e referência visual |
 
 ## Dificuldades comuns
 
