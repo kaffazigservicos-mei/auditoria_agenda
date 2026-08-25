@@ -42,6 +42,8 @@ O manifesto atual não depende da presença de `Tasks API` na lista de serviços
 
 Use a mesma conta Google que possui a planilha, o calendário e as tarefas. A conta do GitHub serve apenas para hospedar o código.
 
+Na versão gratuita do AppSheet utilizada neste projeto, **não é possível exigir login obrigatório dos usuários do aplicativo**. Portanto, não há autenticação individual garantida dentro do app. Mantenha a planilha com acesso **Restrito**, compartilhe o link somente com pessoas de confiança e não coloque no app senhas, tokens, documentos pessoais, dados financeiros ou outras informações confidenciais.
+
 Para uma conta pessoal, associe o Apps Script ao projeto Cloud que você controla, configure o aplicativo OAuth como **Externo**, adicione sua própria conta como usuário de teste e ative a Google Tasks API.
 
 Os escopos de escrita necessários são:
@@ -120,7 +122,17 @@ Não configure uma fórmula que substitua o `ID` importado. Para linhas novas, o
 
 ## 9. Criar as Slices e Views de status
 
-Crie uma Slice `Eventos` com:
+Crie uma Slice `Eventos` para a View **Eventos atuais e futuros** com:
+
+```appsheet
+AND(
+  [Tipo] = "Evento único",
+  [Início] >= TODAY(),
+  [Início] >= DATE("2026-08-01")
+)
+```
+
+Essa é a configuração publicada para o exercício de **2026**: mostra eventos únicos a partir de hoje e a partir de 1º de agosto de 2026. Se quiser uma lista adicional com todos os eventos únicos e recorrentes, crie outra Slice, por exemplo `Todos_Eventos`, usando:
 
 ```appsheet
 OR([Tipo] = "Evento único", [Tipo] = "Evento recorrente")
@@ -169,11 +181,22 @@ Se alguém alterar diretamente Calendar ou Tasks antes da próxima execução, a
 | Evento não é atualizado | ID antigo, calendário diferente ou data inválida | Confirme `CALENDAR_ID`, `Início` e `Fim` |
 | Dados aparecem na aba `Sobre` | Código antigo usava a aba ativa | Use a versão que fixa `Página1` |
 | AppSheet não carrega | Fórmulas antigas referenciam nomes removidos | Use `[Título]`, `[Início]` e `[ID]` |
+| Login obrigatório não aparece | O plano gratuito não oferece essa exigência | Mantenha a planilha restrita, limite o compartilhamento e não use dados sensíveis |
+| Eventos de agosto em diante não aparecem no próximo ano | A data fixa da Slice ainda está em 2026 | Atualize `DATA_INICIO`, `DATA_FIM` e `DATE("2026-08-01")` para o novo exercício |
 | Texto da capa é cortado | Imagem fora da área segura | Use `capa_auditoria_agenda_16x9.png` ou `capa_auditoria_agenda_safe.png` |
 
-## 13. Manutenção
+## 13. Manutenção e atualização para os próximos exercícios
 
-Altere `DATA_INICIO` e `DATA_FIM` conforme o período que deseja auditar. A data final é exclusiva.
+A versão atual está configurada para o exercício de **2026** e para eventos únicos a partir de **1º de agosto de 2026**. Para continuar usando o app em um próximo exercício, atualize os dois lugares abaixo.
+
+No `auditoria.gs`, altere o período. Para 2027, por exemplo:
+
+```javascript
+DATA_INICIO: new Date('2027-01-01T00:00:00Z'),
+DATA_FIM: new Date('2028-01-01T00:00:00Z')
+```
+
+Na Slice `Eventos`, substitua `DATE("2026-08-01")` por `DATE("2027-08-01")`. Depois salve o Apps Script e o AppSheet, execute `exportarAgendaAuditoria` manualmente uma vez e toque em `Sync` no celular. A data final é exclusiva; sempre use o primeiro dia do ano seguinte.
 
 Evite editar diretamente muitas linhas na `Página1`. Prefira o AppSheet para alterações individuais. Não apague linhas para excluir objetos Google, porque a exclusão automática está desativada por segurança.
 

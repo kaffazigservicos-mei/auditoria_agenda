@@ -72,7 +72,36 @@ AND(
 
 O filtro mostra somente eventos únicos a partir do dia atual e a partir de 1º de agosto de 2026. `TODAY()` é recalculado pelo AppSheet conforme a data de uso do app.
 
-Se a instalação for usada em outro ano, atualize o período no Apps Script e a data `DATE("2026-08-01")` da Slice.
+### Ressalva da configuração atual e atualização anual
+
+A configuração publicada está preparada para o exercício de **2026**. O Apps Script importa o intervalo de 1º de janeiro a 31 de dezembro de 2026, e a View **Eventos atuais e futuros** exibe eventos únicos a partir de **1º de agosto de 2026**, sempre respeitando também `TODAY()`.
+
+Para continuar usando o app em um próximo exercício, faça esta atualização no início do ano:
+
+1. Em `auditoria.gs`, altere `DATA_INICIO` para o primeiro dia do novo ano.
+2. Altere `DATA_FIM` para o primeiro dia do ano seguinte. A data final não é incluída.
+3. Na Slice `Eventos` do AppSheet, troque `DATE("2026-08-01")` pela data de 1º de agosto do novo exercício. Por exemplo, para 2027, use `DATE("2027-08-01")`.
+4. Salve o Apps Script e o AppSheet.
+5. Execute `exportarAgendaAuditoria` manualmente uma vez para reconstruir a `Página1` com o novo período.
+6. Toque em `Sync` no celular para baixar a definição e os dados atualizados.
+7. Faça um teste com um evento e uma tarefa antes de voltar ao uso normal.
+
+Exemplo para o exercício de 2027:
+
+```javascript
+DATA_INICIO: new Date('2027-01-01T00:00:00Z'),
+DATA_FIM: new Date('2028-01-01T00:00:00Z')
+```
+
+E na Slice `Eventos`:
+
+```appsheet
+AND(
+  [Tipo] = "Evento único",
+  [Início] >= TODAY(),
+  [Início] >= DATE("2027-08-01")
+)
+```
 
 ## Tarefas e status
 
@@ -196,7 +225,19 @@ Não apague linhas durante o teste. A exclusão automática está desativada.
 
 ## Segurança
 
-Mantenha a planilha com acesso **Restrito** e exija login no AppSheet quando o app tiver dados pessoais. Não publique eventos, tarefas, tokens, chaves ou arquivos de credenciais no GitHub. Um repositório público contém o código, mas não concede automaticamente acesso aos dados Google; o acesso depende das permissões autorizadas em cada instalação.
+### Limitação de segurança do plano gratuito
+
+Na versão gratuita do AppSheet utilizada neste projeto, **não é possível exigir login obrigatório dos usuários do aplicativo**. Portanto, esta instalação não garante autenticação individual dentro do AppSheet.
+
+Para reduzir o risco:
+
+- mantenha a planilha Google Sheets com acesso **Restrito**;
+- compartilhe o link do app somente com pessoas de confiança;
+- use o app para uso pessoal ou para dados que não sejam sensíveis;
+- não coloque senhas, tokens, documentos pessoais, dados financeiros ou informações confidenciais no app;
+- nunca publique eventos, tarefas, chaves ou arquivos de credenciais no GitHub.
+
+Um repositório público contém o código, mas não concede automaticamente acesso à sua planilha, ao Calendar ou ao Tasks. O acesso depende das autorizações concedidas em cada instalação. Para dados sensíveis, será necessária uma solução com autenticação individual compatível com a política de segurança desejada.
 
 ## Arquivos principais
 
@@ -204,7 +245,7 @@ Mantenha a planilha com acesso **Restrito** e exija login no AppSheet quando o a
 |---|---|
 | `auditoria.gs` | Sincronização bidirecional e criação do gatilho |
 | `appsscript.json` | Escopos OAuth de leitura e escrita |
-| `GUIA_NOVO_USUARIO.md` | Instalação didática para novos usuários |
+| `GUIA_NOVO_USUARIO.md` | Instalação didática para novos usuários, segurança e atualização anual |
 | `GUIA_INICIO.md` | Guia operacional completo |
 | `APPSHEET_CONFIG_BIDIRECTIONAL.md` | Slices, Views e campos editáveis |
 | `test_auditoria_bidirectional.js` | Testes da integração bidirecional |

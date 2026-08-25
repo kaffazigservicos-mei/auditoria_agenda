@@ -20,6 +20,14 @@ Você precisa ter:
 
 Use a **mesma conta Google** para a planilha, o Calendar, o Tasks e o Apps Script. A conta do GitHub serve somente para copiar o código; ela não precisa ser a mesma conta Google.
 
+### Importante sobre segurança e plano gratuito
+
+Na versão gratuita do AppSheet usada neste projeto, **não é possível exigir login obrigatório dos usuários do aplicativo**. Isso significa que não há autenticação individual garantida dentro do app.
+
+Para reduzir o risco, mantenha a planilha com acesso **Restrito**, compartilhe o link do AppSheet somente com pessoas de confiança e use o app apenas para dados pessoais de baixo risco ou dados que não sejam confidenciais. Não coloque senhas, tokens, documentos pessoais, dados financeiros ou informações sensíveis no app.
+
+O repositório público do GitHub contém código e documentação, mas não contém automaticamente os dados da sua conta Google. A conta que instala e autoriza o projeto é a responsável pelos acessos.
+
 ## Passo 1 — Copiar o projeto
 
 Abra o repositório:
@@ -171,6 +179,40 @@ AND(
 
 Essa Slice mostra somente eventos únicos com início a partir de hoje e a partir de 1º de agosto de 2026. A data `TODAY()` muda automaticamente conforme o dia em que o app é usado.
 
+### Configuração atual e atualização para os próximos exercícios
+
+A versão publicada está preparada para o exercício de **2026**. O Apps Script importa o período de 1º de janeiro a 31 de dezembro de 2026, e a Slice acima limita a View aos eventos únicos de 1º de agosto de 2026 em diante, desde que também ocorram a partir de hoje.
+
+Para continuar usando o app no próximo exercício, por exemplo 2027:
+
+1. Abra `auditoria.gs`.
+2. Troque `DATA_INICIO` para `2027-01-01T00:00:00Z`.
+3. Troque `DATA_FIM` para `2028-01-01T00:00:00Z`.
+4. Na Slice `Eventos`, troque `DATE("2026-08-01")` por `DATE("2027-08-01")`.
+5. Salve o Apps Script e o AppSheet.
+6. Execute `exportarAgendaAuditoria` manualmente uma vez.
+7. No celular, toque em `Sync`.
+8. Faça um teste com um evento e uma tarefa.
+
+Exemplo para 2027 no Apps Script:
+
+```javascript
+DATA_INICIO: new Date('2027-01-01T00:00:00Z'),
+DATA_FIM: new Date('2028-01-01T00:00:00Z')
+```
+
+Exemplo para 2027 na Slice:
+
+```appsheet
+AND(
+  [Tipo] = "Evento único",
+  [Início] >= TODAY(),
+  [Início] >= DATE("2027-08-01")
+)
+```
+
+A data final do Apps Script é exclusiva. Portanto, para cada exercício, use o primeiro dia do ano seguinte como `DATA_FIM`.
+
 Se a coluna `Início` for `DateTime`, a comparação continua funcionando. Se ela for `Text`, altere o tipo da coluna para `Date` ou `DateTime` antes de testar.
 
 ### Todos os eventos
@@ -279,9 +321,19 @@ Não apague linhas durante o teste. A versão atual não apaga automaticamente o
 | Dados aparecem em `Sobre` | O script correto grava somente em `Página1`; substitua o código antigo |
 | Execução automática não aparece | Execute `configurarSincronizacaoAutomatica` uma vez e confira **Gatilhos** |
 
-## Segurança
+## Segurança e limitações do plano gratuito
 
-Mantenha a planilha com acesso **Restrito** e permita o AppSheet somente para usuários que devem usar o aplicativo. Nunca publique eventos, tarefas, tokens ou credenciais no GitHub. O código público não dá acesso automático aos seus dados; o acesso depende das autorizações concedidas pela sua conta Google.
+Na versão gratuita do AppSheet utilizada neste projeto, **não é possível exigir login obrigatório dos usuários do aplicativo**. Portanto, não considere que o app oferece autenticação individual ou controle de acesso por usuário.
+
+Use estas medidas de redução de risco:
+
+- mantenha a planilha Google Sheets com acesso **Restrito**;
+- compartilhe o link do AppSheet somente com pessoas de confiança;
+- use o app para uso pessoal ou para dados que não sejam sensíveis;
+- não coloque senhas, tokens, documentos pessoais, dados financeiros ou informações confidenciais no app;
+- nunca publique eventos, tarefas, chaves ou arquivos de credenciais no GitHub.
+
+Um repositório público contém o código, mas não concede automaticamente acesso à sua planilha, ao Calendar ou ao Tasks. O acesso depende das autorizações concedidas pela conta que instala o Apps Script. Para dados sensíveis ou uso com pessoas não confiáveis, será necessária uma solução com autenticação individual compatível com a política de segurança desejada.
 
 Se precisar interromper a automação, abra **Apps Script → Gatilhos** e exclua o gatilho de `exportarAgendaAuditoria`.
 
