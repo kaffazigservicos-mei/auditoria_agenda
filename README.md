@@ -168,7 +168,7 @@ Para o botão `+` abrir um formulário funcional, abra **Data → Tables → Pá
 
 As colunas `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status` devem estar com **Show?** e **Editable?** ligados. `ID`, `_RowNumber` e `Origem` podem ficar ocultos e não editáveis.
 
-Para que apareçam opções no formulário, configure `Tipo`, `Status` e `Lista` como **Enum**, com **Input mode = Dropdown** e **Allow other values** desativado. Use os valores:
+Para que apareçam opções no formulário, configure `Tipo`, `Status` e `Lista` como **Enum**, com **Input mode = Dropdown** e **Allow other values** desativado. No campo `Values`, adicione cada opção separadamente; não cole várias opções juntas em `App formula` ou `Initial value`. Se `Values` não aparecer, use `Valid If` com uma expressão `LIST(...)`. Use os valores:
 
 | Coluna | Opções |
 |---|---|
@@ -176,7 +176,9 @@ Para que apareçam opções no formulário, configure `Tipo`, `Status` e `Lista`
 | `Status` | `Pendente`, `Concluída` |
 | `Lista` | `A fazer`, `Concluídas`, `Plano da semana` ou os nomes exatos das listas existentes no Google Tasks |
 
-Em `Status`, use valor inicial `Pendente`. `Lista` identifica a lista do Google Tasks; não substitui o campo `Status`. Use `Enum`, e não `EnumList`, porque cada tarefa deve ter uma única lista e um único status.
+Em `Status`, use apenas `"Pendente"` no campo `Initial value`. Em `Tipo` e `Lista`, o valor inicial deve ser vazio ou conter apenas uma opção. `App formula` deve ficar vazio nessas três colunas. `Lista` identifica a lista do Google Tasks; não substitui o campo `Status`. Use `Enum`, e não `EnumList`, porque cada tarefa deve ter uma única lista e um único status.
+
+Se precisar usar `Valid If`, informe uma lista com a função `LIST`, por exemplo `LIST("Pendente", "Concluída")` para `Status`.
 
 A ordem recomendada do formulário é:
 

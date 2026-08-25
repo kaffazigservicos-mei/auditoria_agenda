@@ -162,7 +162,7 @@ Para o botão `+` abrir um formulário com campos preenchíveis, abra **Data →
 
 Em **Data → Columns → Página1**, deixe **Show?** e **Editable?** ligados para `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
 
-Para mostrar opções de seleção no formulário, configure `Tipo`, `Lista` e `Status` como **Enum**, com **Input mode = Dropdown** e **Allow other values** desativado. Em `Values`, informe:
+Para mostrar opções de seleção no formulário, configure `Tipo`, `Lista` e `Status` como **Enum**, com **Input mode = Dropdown** e **Allow other values** desativado. Em `Values`, adicione cada item separadamente. Não cole todos os itens juntos no campo de fórmula nem no `Initial value`. Se `Values` não aparecer, use `Valid If` com `LIST(...)`. Deixe `App formula` vazio nessas colunas. Em `Values`, informe:
 
 | Coluna | Opções |
 |---|---|
@@ -170,7 +170,17 @@ Para mostrar opções de seleção no formulário, configure `Tipo`, `Lista` e `
 | `Status` | `Pendente`, `Concluída` |
 | `Lista` | `A fazer`, `Concluídas`, `Plano da semana` ou os nomes exatamente iguais aos das listas no Google Tasks |
 
-Use `Pendente` como valor inicial de `Status`. `Lista` indica em qual lista do Google Tasks a tarefa será criada; `Status` indica se ela está pendente ou concluída. Não use `EnumList`, pois cada registro deve ter uma única lista e um único status.
+Use apenas `"Pendente"` como valor inicial de `Status`. Em `Tipo` e `Lista`, deixe `Initial value` vazio ou informe somente uma opção. `Lista` indica em qual lista do Google Tasks a tarefa será criada; `Status` indica se ela está pendente ou concluída. Não use `EnumList`, pois cada registro deve ter uma única lista e um único status.
+
+Se não houver campo `Values`, use estas expressões no campo `Valid If`:
+
+```appsheet
+Tipo: LIST("Evento único", "Evento recorrente", "Tarefa")
+Status: LIST("Pendente", "Concluída")
+Lista: LIST("A fazer", "Concluídas", "Plano da semana")
+```
+
+Na captura, textos como `Evento únicoEvento...`, `A fazerConcluídas...` e `PendenteConcluída...` estão concatenados e não formam uma lista válida.
 
 O formulário deve apresentar, preferencialmente, estes campos nesta ordem:
 

@@ -70,11 +70,14 @@ Abra **Data → Columns → Página1** e configure:
 
 Abra **Data → Columns → Página1** e clique no ícone de edição da coluna. Para cada coluna abaixo, selecione **Type = Enum**, mantenha **Base type = Text**, escolha **Input mode = Dropdown** e use **Allow other values** desativado.
 
+Importante: não digite várias opções juntas no campo `App formula`, `Initial value` ou em um único campo de texto. Uma sequência como `Evento únicoEvento recorrenteTarefa` não é uma lista válida. As opções precisam ser adicionadas separadamente em `Values` ou informadas por uma expressão `LIST(...)` em `Valid If`. Deixe `App formula` vazio para essas colunas.
+
 | Coluna | Opções que devem ser adicionadas em `Values` |
 |---|---|
 | `Tipo` | `Evento único`, `Evento recorrente`, `Tarefa` |
 | `Status` | `Pendente`, `Concluída` |
-| `Lista` | `A fazer`, `Concluídas`, `Plano da semana` |
+| `Lista` | `A fazer`, `Concluídas`, `Plano da semana` — cada item separado; use os nomes reais das listas |
+
 
 Em `Status`, defina **Initial value** como:
 
@@ -87,6 +90,40 @@ As opções de `Lista` precisam ser iguais, letra por letra, aos nomes das lista
 A coluna `Lista` representa uma lista do Google Tasks, não o status da tarefa. Portanto, `Concluídas` pode ser uma lista de tarefas, mas o estado concluído deve ser escolhido separadamente em `Status = Concluída`.
 
 Para o formulário, mantenha `Show?` e `Editable?` ligados nessas três colunas. Depois clique em **Done** ou **Save**.
+
+Se a sua tela não mostrar o campo `Values`, use `Valid If` com uma destas expressões:
+
+**Tipo — Valid If**
+
+```appsheet
+LIST("Evento único", "Evento recorrente", "Tarefa")
+```
+
+**Status — Valid If**
+
+```appsheet
+LIST("Pendente", "Concluída")
+```
+
+**Lista — Valid If**
+
+```appsheet
+LIST("A fazer", "Concluídas", "Plano da semana")
+```
+
+Na coluna `Status`, `Initial value` pode conter apenas:
+
+```appsheet
+"Pendente"
+```
+
+Na coluna `Lista`, `Initial value` pode conter apenas uma lista, por exemplo:
+
+```appsheet
+"A fazer"
+```
+
+Na coluna `Tipo`, deixe `Initial value` vazio ou use apenas uma opção, como `"Tarefa"`. Não coloque a lista inteira no valor inicial.
 
 Para evitar que o AppSheet exija prazo de tarefas sem prazo, use estas expressões opcionais:
 

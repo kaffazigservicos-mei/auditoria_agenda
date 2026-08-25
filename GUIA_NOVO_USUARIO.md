@@ -273,7 +273,8 @@ No novo editor, `Are updates allowed?` não aparece diretamente na lista princip
 7. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
 8. Confira se a Slice da View contém `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
 9. Configure `Tipo`, `Status` e `Lista` como **Enum**, com **Input mode = Dropdown** e **Allow other values** desativado.
-10. Em `Values`, adicione:
+10. Em `Values`, adicione cada opção separadamente. Não cole várias opções juntas no campo de fórmula ou em `Initial value`. Se `Values` não aparecer, use `Valid If` com `LIST(...)`.
+11. Em `Values`, adicione:
 
 | Coluna | Opções |
 |---|---|
@@ -281,7 +282,17 @@ No novo editor, `Are updates allowed?` não aparece diretamente na lista princip
 | `Status` | `Pendente`, `Concluída` |
 | `Lista` | `A fazer`, `Concluídas`, `Plano da semana` ou os nomes exatos das listas existentes no Google Tasks |
 
-Em `Status`, use `Pendente` como valor inicial. `Lista` indica a lista do Google Tasks; `Status` indica a situação da tarefa. Use `Enum`, não `EnumList`, pois cada registro terá uma única opção em cada campo.
+Em `Status`, use somente `"Pendente"` como valor inicial. Em `Tipo` e `Lista`, deixe `Initial value` vazio ou informe uma única opção. Deixe `App formula` vazio. `Lista` indica a lista do Google Tasks; `Status` indica a situação da tarefa. Use `Enum`, não `EnumList`, pois cada registro terá uma única opção em cada campo.
+
+Se a tela não mostrar `Values`, use estas expressões em `Valid If`:
+
+```appsheet
+Tipo: LIST("Evento único", "Evento recorrente", "Tarefa")
+Status: LIST("Pendente", "Concluída")
+Lista: LIST("A fazer", "Concluídas", "Plano da semana")
+```
+
+Textos concatenados como `Evento únicoEvento...`, `A fazerConcluídas...` e `PendenteConcluída...` não são listas válidas e devem ser apagados do campo em que foram colocados.
 
 A ordem recomendada no formulário é:
 
