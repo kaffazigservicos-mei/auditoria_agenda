@@ -177,18 +177,20 @@ AND(
 )
 ```
 
-Essa Slice mostra somente eventos únicos com início a partir de hoje e a partir de 1º de agosto de 2026. A data `TODAY()` muda automaticamente conforme o dia em que o app é usado.
+Essa Slice mostra somente eventos únicos com início a partir de hoje e, especificamente no exercício de 2026, a partir de 1º de agosto de 2026. A data `TODAY()` muda automaticamente conforme o dia em que o app é usado.
 
 ### Configuração atual e atualização para os próximos exercícios
 
 A versão publicada está preparada para o exercício de **2026**. O Apps Script importa o período de 1º de janeiro a 31 de dezembro de 2026, e a Slice acima limita a View aos eventos únicos de 1º de agosto de 2026 em diante, desde que também ocorram a partir de hoje.
+
+O corte de 1º de agosto é uma regra exclusiva de 2026. Ele não deve ser repetido automaticamente nos exercícios seguintes; nos próximos anos, a View deve mostrar eventos únicos a partir de hoje.
 
 Para continuar usando o app no próximo exercício, por exemplo 2027:
 
 1. Abra `auditoria.gs`.
 2. Troque `DATA_INICIO` para `2027-01-01T00:00:00Z`.
 3. Troque `DATA_FIM` para `2028-01-01T00:00:00Z`.
-4. Na Slice `Eventos`, troque `DATE("2026-08-01")` por `DATE("2027-08-01")`.
+4. Na Slice `Eventos`, remova a condição fixa de agosto e mantenha somente a regra de hoje em diante.
 5. Salve o Apps Script e o AppSheet.
 6. Execute `exportarAgendaAuditoria` manualmente uma vez.
 7. No celular, toque em `Sync`.
@@ -206,12 +208,11 @@ Exemplo para 2027 na Slice:
 ```appsheet
 AND(
   [Tipo] = "Evento único",
-  [Início] >= TODAY(),
-  [Início] >= DATE("2027-08-01")
+  [Início] >= TODAY()
 )
 ```
 
-A data final do Apps Script é exclusiva. Portanto, para cada exercício, use o primeiro dia do ano seguinte como `DATA_FIM`.
+A data final do Apps Script é exclusiva. Portanto, para cada exercício, use o primeiro dia do ano seguinte como `DATA_FIM`. Se no futuro você quiser estabelecer outro mês de corte, isso deverá ser uma decisão específica daquele exercício; não é uma regra automática do sistema.
 
 Se a coluna `Início` for `DateTime`, a comparação continua funcionando. Se ela for `Text`, altere o tipo da coluna para `Date` ou `DateTime` antes de testar.
 

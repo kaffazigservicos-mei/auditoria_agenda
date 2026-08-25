@@ -182,12 +182,12 @@ Se alguém alterar diretamente Calendar ou Tasks antes da próxima execução, a
 | Dados aparecem na aba `Sobre` | Código antigo usava a aba ativa | Use a versão que fixa `Página1` |
 | AppSheet não carrega | Fórmulas antigas referenciam nomes removidos | Use `[Título]`, `[Início]` e `[ID]` |
 | Login obrigatório não aparece | O plano gratuito não oferece essa exigência | Mantenha a planilha restrita, limite o compartilhamento e não use dados sensíveis |
-| Eventos de agosto em diante não aparecem no próximo ano | A data fixa da Slice ainda está em 2026 | Atualize `DATA_INICIO`, `DATA_FIM` e `DATE("2026-08-01")` para o novo exercício |
+| Eventos do próximo exercício não aparecem | O período do Apps Script ou a Slice ainda está configurado para 2026 | Atualize `DATA_INICIO` e `DATA_FIM`; nos próximos exercícios, use somente `[Início] >= TODAY()` na Slice |
 | Texto da capa é cortado | Imagem fora da área segura | Use `capa_auditoria_agenda_16x9.png` ou `capa_auditoria_agenda_safe.png` |
 
 ## 13. Manutenção e atualização para os próximos exercícios
 
-A versão atual está configurada para o exercício de **2026** e para eventos únicos a partir de **1º de agosto de 2026**. Para continuar usando o app em um próximo exercício, atualize os dois lugares abaixo.
+A versão atual está configurada para o exercício de **2026** e para eventos únicos a partir de **1º de agosto de 2026**. Esse corte de agosto é exclusivo de 2026. Para continuar usando o app em um próximo exercício, a importação deve começar em janeiro e a View deve mostrar eventos únicos a partir de hoje; atualize os dois lugares abaixo.
 
 No `auditoria.gs`, altere o período. Para 2027, por exemplo:
 
@@ -196,7 +196,7 @@ DATA_INICIO: new Date('2027-01-01T00:00:00Z'),
 DATA_FIM: new Date('2028-01-01T00:00:00Z')
 ```
 
-Na Slice `Eventos`, substitua `DATE("2026-08-01")` por `DATE("2027-08-01")`. Depois salve o Apps Script e o AppSheet, execute `exportarAgendaAuditoria` manualmente uma vez e toque em `Sync` no celular. A data final é exclusiva; sempre use o primeiro dia do ano seguinte.
+Na Slice `Eventos`, remova a condição fixa `DATE("2026-08-01")` e mantenha somente a regra `[Início] >= TODAY()`. Depois salve o Apps Script e o AppSheet, execute `exportarAgendaAuditoria` manualmente uma vez e toque em `Sync` no celular. A data final é exclusiva; sempre use o primeiro dia do ano seguinte.
 
 Evite editar diretamente muitas linhas na `Página1`. Prefira o AppSheet para alterações individuais. Não apague linhas para excluir objetos Google, porque a exclusão automática está desativada por segurança.
 

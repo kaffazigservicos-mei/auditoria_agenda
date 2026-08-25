@@ -70,17 +70,19 @@ AND(
 )
 ```
 
-O filtro mostra somente eventos únicos a partir do dia atual e a partir de 1º de agosto de 2026. `TODAY()` é recalculado pelo AppSheet conforme a data de uso do app.
+O filtro mostra somente eventos únicos a partir do dia atual e, especificamente no exercício de 2026, a partir de 1º de agosto de 2026. `TODAY()` é recalculado pelo AppSheet conforme a data de uso do app.
 
 ### Ressalva da configuração atual e atualização anual
 
 A configuração publicada está preparada para o exercício de **2026**. O Apps Script importa o intervalo de 1º de janeiro a 31 de dezembro de 2026, e a View **Eventos atuais e futuros** exibe eventos únicos a partir de **1º de agosto de 2026**, sempre respeitando também `TODAY()`.
 
+O corte de agosto é uma regra específica de 2026. Ele **não deve ser repetido automaticamente nos exercícios seguintes**.
+
 Para continuar usando o app em um próximo exercício, faça esta atualização no início do ano:
 
 1. Em `auditoria.gs`, altere `DATA_INICIO` para o primeiro dia do novo ano.
 2. Altere `DATA_FIM` para o primeiro dia do ano seguinte. A data final não é incluída.
-3. Na Slice `Eventos` do AppSheet, troque `DATE("2026-08-01")` pela data de 1º de agosto do novo exercício. Por exemplo, para 2027, use `DATE("2027-08-01")`.
+3. Na Slice `Eventos`, remova a condição fixa de agosto e mantenha somente a regra dinâmica de hoje em diante.
 4. Salve o Apps Script e o AppSheet.
 5. Execute `exportarAgendaAuditoria` manualmente uma vez para reconstruir a `Página1` com o novo período.
 6. Toque em `Sync` no celular para baixar a definição e os dados atualizados.
@@ -98,10 +100,11 @@ E na Slice `Eventos`:
 ```appsheet
 AND(
   [Tipo] = "Evento único",
-  [Início] >= TODAY(),
-  [Início] >= DATE("2027-08-01")
+  [Início] >= TODAY()
 )
 ```
+
+Se no futuro você quiser estabelecer novamente um mês de corte específico, acrescente uma segunda condição com a data desejada. Isso é opcional e não faz parte da configuração padrão dos próximos exercícios.
 
 ## Tarefas e status
 
