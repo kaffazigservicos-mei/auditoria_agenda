@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "title": "Crie sua própria Auditoria Agenda",
+    "created": 1787680595.776,
+    "last_updated": 1787680799.688,
+    "total_slides": 8
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "slide1",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "slide2",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "slide3",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "slide4",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "slide5",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "slide6",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "slide7",
+      "state": "edited",
+      "pageNum": 8
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Crie sua própria Auditoria Agenda",
+      "summary": "Capa com o título, subtítulo chamativo e o rodapé institucional com a mesma identidade visual da apresentação original.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide1",
+      "title": "Eventos e tarefas em um só lugar",
+      "summary": "Apresenta a solução: um app que reúne Google Calendar e Google Tasks usando o AppSheet.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide2",
+      "title": "O que você precisa para começar",
+      "summary": "Lista os requisitos simples: uma conta Google, Google Sheets, Apps Script e AppSheet. Sem necessidade de programação.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide3",
+      "title": "Passo 1: A planilha e o código",
+      "summary": "Explica como criar a aba Página1 e copiar os arquivos do repositório para o Apps Script.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide4",
+      "title": "Passo 2: Autorizar a conta Google",
+      "summary": "Mostra como executar a sincronização inicial e autorizar o script de forma segura na própria conta.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide5",
+      "title": "Passo 3: Montar o AppSheet",
+      "summary": "Orienta a criar o aplicativo a partir da planilha e configurar as Slices e Views para tarefas e eventos.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide6",
+      "title": "Passo 4: Sincronização no celular",
+      "summary": "Ensina a salvar o app, tocar em Sync no celular e ativar o gatilho automático de cinco minutos.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide7",
+      "title": "Auditoria Agenda",
+      "summary": "Encerramento com o link do repositório no GitHub, reforçando que o controle dos dados continua com o usuário, e o rodapé institucional.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}
