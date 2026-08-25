@@ -154,10 +154,10 @@ A mensagem final deve informar quantos eventos e tarefas foram importados. Se ap
 | `Título` | Tipo `Text`; `Label` ligado |
 | `Início` | `Date` ou `DateTime` |
 | `Fim` | `Date` ou `DateTime` |
-| `Tipo` | `Text` ou `Enum` |
+| `Tipo` | `Enum`: `Evento único`, `Evento recorrente` ou `Tarefa` |
 | `Origem` | `Text` |
-| `Lista` | `Text` |
-| `Status` | `Text` ou `Enum` com `Pendente` e `Concluída` |
+| `Lista` | `Enum`: nomes exatos das listas do Google Tasks |
+| `Status` | `Enum`: `Pendente` ou `Concluída`; modo `Dropdown` |
 
 Não crie uma fórmula que substitua o valor importado de `ID`.
 
@@ -272,6 +272,16 @@ No novo editor, `Are updates allowed?` não aparece diretamente na lista princip
 6. Em **Data → Columns → Página1**, deixe **Show?** e **Editable?** ligados para `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
 7. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
 8. Confira se a Slice da View contém `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
+9. Configure `Tipo`, `Status` e `Lista` como **Enum**, com **Input mode = Dropdown** e **Allow other values** desativado.
+10. Em `Values`, adicione:
+
+| Coluna | Opções |
+|---|---|
+| `Tipo` | `Evento único`, `Evento recorrente`, `Tarefa` |
+| `Status` | `Pendente`, `Concluída` |
+| `Lista` | `A fazer`, `Concluídas`, `Plano da semana` ou os nomes exatos das listas existentes no Google Tasks |
+
+Em `Status`, use `Pendente` como valor inicial. `Lista` indica a lista do Google Tasks; `Status` indica a situação da tarefa. Use `Enum`, não `EnumList`, pois cada registro terá uma única opção em cada campo.
 
 A ordem recomendada no formulário é:
 
@@ -286,7 +296,7 @@ Status
 
 Para criar um evento, escolha `Tipo = Evento único`, preencha `Título` e `Início` e, se quiser, `Fim`. Para criar uma tarefa, escolha `Tipo = Tarefa`, preencha `Título` e `Lista` e, se quiser, `Início` e `Status`.
 
-Se o botão `+` abrir uma tela sem campos, verifique se a tabela está em modo somente leitura, se existe `Editable_If = FALSE` ou se os campos foram retirados da Slice. O guia detalhado está em [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md).
+Se o botão `+` abrir uma tela sem campos ou sem opções, verifique se a tabela está em modo somente leitura, se existe `Editable_If = FALSE`, se as colunas estão como `Enum`, se os valores foram adicionados em `Values` ou se os campos foram retirados da Slice. O guia detalhado está em [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md).
 
 ## Passo 12 — Salvar e atualizar o celular
 

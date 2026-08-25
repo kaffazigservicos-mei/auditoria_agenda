@@ -144,10 +144,10 @@ Em **Data → Tables**, selecione `Página1` e execute **Regenerate structure** 
 | `Título` | Tipo `Text`; `Label` ligado |
 | `Início` | Tipo `Date` ou `DateTime` |
 | `Fim` | Tipo `Date` ou `DateTime` |
-| `Tipo` | Tipo `Text` ou `Enum` |
+| `Tipo` | Tipo `Enum`, com `Evento único`, `Evento recorrente` e `Tarefa` |
 | `Origem` | Tipo `Text` |
-| `Lista` | Tipo `Text` |
-| `Status` | Tipo `Text` ou `Enum`, com `Pendente` e `Concluída` |
+| `Lista` | Tipo `Enum`, com os nomes exatos das listas do Google Tasks |
+| `Status` | Tipo `Enum`, com `Pendente` e `Concluída`; modo `Dropdown` |
 
 Em **Data → Slices**, inclua `ID` e `_RowNumber` em todas as Slices. `_RowNumber` é técnico e não precisa aparecer na View.
 
@@ -166,7 +166,19 @@ A View que deve aparecer na barra inferior precisa ter `Position = Primary`.
 
 Para o botão `+` abrir um formulário funcional, abra **Data → Tables → Página1** e clique no ícone de **Table settings** no cabeçalho da tabela. Dentro dele, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. No novo editor, essa opção não aparece diretamente na lista de tabelas. Não use `UPDATES_ONLY` nem `READ_ONLY`.
 
-As colunas `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status` devem estar com **Show?** e **Editable?** ligados. `ID`, `_RowNumber` e `Origem` podem ficar ocultos e não editáveis. A ordem recomendada do formulário é:
+As colunas `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status` devem estar com **Show?** e **Editable?** ligados. `ID`, `_RowNumber` e `Origem` podem ficar ocultos e não editáveis.
+
+Para que apareçam opções no formulário, configure `Tipo`, `Status` e `Lista` como **Enum**, com **Input mode = Dropdown** e **Allow other values** desativado. Use os valores:
+
+| Coluna | Opções |
+|---|---|
+| `Tipo` | `Evento único`, `Evento recorrente`, `Tarefa` |
+| `Status` | `Pendente`, `Concluída` |
+| `Lista` | `A fazer`, `Concluídas`, `Plano da semana` ou os nomes exatos das listas existentes no Google Tasks |
+
+Em `Status`, use valor inicial `Pendente`. `Lista` identifica a lista do Google Tasks; não substitui o campo `Status`. Use `Enum`, e não `EnumList`, porque cada tarefa deve ter uma única lista e um único status.
+
+A ordem recomendada do formulário é:
 
 ```text
 Título → Tipo → Início → Fim → Lista → Status
@@ -174,7 +186,7 @@ Título → Tipo → Início → Fim → Lista → Status
 
 Para criar um evento, escolha `Tipo = Evento único`, preencha `Título` e `Início` e, se quiser, `Fim`. Para criar uma tarefa, escolha `Tipo = Tarefa`, preencha `Título` e `Lista` e, se quiser, `Início` e `Status`. Depois de salvar no celular, toque em `Sync`.
 
-Se o botão `+` abrir uma tela sem campos, confira também se a Slice da View contém todas essas colunas e se não existe `Editable_If = FALSE` nos campos. O guia detalhado está em [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md).
+Se o botão `+` abrir uma tela sem campos ou sem opções, confira se a Slice da View contém todas essas colunas, se o tipo é `Enum`, se há valores em `Values` e se não existe `Editable_If = FALSE` nos campos. O guia detalhado está em [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md).
 
 ## Atualização no celular
 

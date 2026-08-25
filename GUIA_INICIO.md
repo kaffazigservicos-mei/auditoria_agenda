@@ -113,10 +113,10 @@ Em **Data → Columns**, confirme:
 | `Título` | Tipo `Text` e `Label` ligado |
 | `Início` | `Date` ou `DateTime` |
 | `Fim` | `Date` ou `DateTime` |
-| `Tipo` | `Text` ou `Enum` |
+| `Tipo` | `Enum`: `Evento único`, `Evento recorrente` ou `Tarefa` |
 | `Origem` | `Text` |
-| `Lista` | `Text` |
-| `Status` | `Text` ou `Enum` com `Pendente` e `Concluída` |
+| `Lista` | `Enum`: nomes exatos das listas do Google Tasks |
+| `Status` | `Enum`: `Pendente` ou `Concluída`; modo `Dropdown` |
 
 Não configure uma fórmula que substitua o `ID` importado. Para linhas novas, o AppSheet pode usar `UNIQUEID()` como valor inicial; depois da sincronização o script importará o ID externo definitivo.
 
@@ -162,6 +162,16 @@ Para o botão `+` abrir um formulário com campos preenchíveis, abra **Data →
 
 Em **Data → Columns → Página1**, deixe **Show?** e **Editable?** ligados para `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
 
+Para mostrar opções de seleção no formulário, configure `Tipo`, `Lista` e `Status` como **Enum**, com **Input mode = Dropdown** e **Allow other values** desativado. Em `Values`, informe:
+
+| Coluna | Opções |
+|---|---|
+| `Tipo` | `Evento único`, `Evento recorrente`, `Tarefa` |
+| `Status` | `Pendente`, `Concluída` |
+| `Lista` | `A fazer`, `Concluídas`, `Plano da semana` ou os nomes exatamente iguais aos das listas no Google Tasks |
+
+Use `Pendente` como valor inicial de `Status`. `Lista` indica em qual lista do Google Tasks a tarefa será criada; `Status` indica se ela está pendente ou concluída. Não use `EnumList`, pois cada registro deve ter uma única lista e um único status.
+
 O formulário deve apresentar, preferencialmente, estes campos nesta ordem:
 
 ```text
@@ -175,7 +185,7 @@ Status
 
 Para criar um evento, escolha `Tipo = Evento único`, preencha `Título` e `Início` e, se quiser, `Fim`. Para criar uma tarefa, escolha `Tipo = Tarefa`, preencha `Título` e `Lista` e, se quiser, `Início` e `Status`. A Slice usada pela View também precisa conter esses campos.
 
-Se o botão `+` abrir uma tela vazia, verifique se a tabela ou a Slice está em modo somente leitura, se existe `Editable_If = FALSE` ou se os campos foram retirados da Slice. Depois de salvar o editor, toque em `Sync` no celular. Veja o procedimento completo em [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md).
+Se o botão `+` abrir uma tela vazia ou sem opções, verifique se a tabela ou a Slice está em modo somente leitura, se existe `Editable_If = FALSE`, se as colunas estão como `Enum`, se os valores foram adicionados em `Values` ou se os campos foram retirados da Slice. Depois de salvar o editor, toque em `Sync` no celular. Veja o procedimento completo em [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md).
 
 ## 11. Configurar a página Sobre
 

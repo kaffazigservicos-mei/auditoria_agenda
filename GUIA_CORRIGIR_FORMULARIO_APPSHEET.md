@@ -63,8 +63,30 @@ Abra **Data → Columns → Página1** e configure:
 | `Tipo` | Enum | Sim | Sim | `Evento único`, `Evento recorrente`, `Tarefa` |
 | `Origem` | Text | Não | Não | Pode ficar vazio em novos registros |
 | `Lista` | Text | Sim | Sim | Necessário para tarefas; pode ficar vazio para eventos |
-| `Status` | Enum | Sim | Sim | `Pendente`, `Concluída`; Initial value: `Pendente` |
+| `Status` | Enum | Sim | Sim | Valores: `Pendente`, `Concluída`; Initial value: `Pendente`; Input mode: `Dropdown`; Allow other values: desativado |
 | `_RowNumber` | Number | Não | Não | Coluna técnica |
+
+## 3.1 Configurar as opções de seleção
+
+Abra **Data → Columns → Página1** e clique no ícone de edição da coluna. Para cada coluna abaixo, selecione **Type = Enum**, mantenha **Base type = Text**, escolha **Input mode = Dropdown** e use **Allow other values** desativado.
+
+| Coluna | Opções que devem ser adicionadas em `Values` |
+|---|---|
+| `Tipo` | `Evento único`, `Evento recorrente`, `Tarefa` |
+| `Status` | `Pendente`, `Concluída` |
+| `Lista` | `A fazer`, `Concluídas`, `Plano da semana` |
+
+Em `Status`, defina **Initial value** como:
+
+```appsheet
+"Pendente"
+```
+
+As opções de `Lista` precisam ser iguais, letra por letra, aos nomes das listas existentes no Google Tasks. Se a sua conta usa outros nomes, coloque exatamente os nomes que aparecem no Google Tasks. O Apps Script procura a lista pelo nome e, se não encontrar correspondência, pode usar a primeira lista disponível.
+
+A coluna `Lista` representa uma lista do Google Tasks, não o status da tarefa. Portanto, `Concluídas` pode ser uma lista de tarefas, mas o estado concluído deve ser escolhido separadamente em `Status = Concluída`.
+
+Para o formulário, mantenha `Show?` e `Editable?` ligados nessas três colunas. Depois clique em **Done** ou **Save**.
 
 Para evitar que o AppSheet exija prazo de tarefas sem prazo, use estas expressões opcionais:
 

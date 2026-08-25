@@ -12,10 +12,10 @@ Em **Data → Tables → Página1**, execute **Regenerate structure**. Em **Data
 | `Título` | Text | Label ligado |
 | `Início` | Date ou DateTime | Editável para tarefas/eventos |
 | `Fim` | Date ou DateTime | Editável para eventos |
-| `Tipo` | Enum/Text | `Evento único`, `Evento recorrente`, `Tarefa` |
+| `Tipo` | Enum | `Evento único`, `Evento recorrente`, `Tarefa`; Input mode `Dropdown` |
 | `Origem` | Text | Não editar manualmente |
-| `Lista` | Text | Nome da lista para novas tarefas |
-| `Status` | Enum | `Pendente`, `Concluída` |
+| `Lista` | Enum | Nome da lista para novas tarefas; Input mode `Dropdown` |
+| `Status` | Enum | `Pendente`, `Concluída`; Input mode `Dropdown` |
 
 Para novas linhas, use `UNIQUEID()` apenas como valor inicial temporário de `ID`. O script substitui esse identificador após criar o objeto externo.
 
@@ -84,6 +84,16 @@ Nas configurações de colunas de `Página1`, use:
 | `Status` | Sim | Sim | Pendente ou Concluída; padrão Pendente |
 
 No formulário, deixe a ordem `Título`, `Tipo`, `Início`, `Fim`, `Lista`, `Status`. O formulário pode ser criado automaticamente pelo AppSheet quando o usuário toca em `+`.
+
+Configure as opções de seleção em **Data → Columns → Página1**, editando cada coluna:
+
+| Coluna | Type | Valores em `Values` |
+|---|---|---|
+| `Tipo` | Enum | `Evento único`, `Evento recorrente`, `Tarefa` |
+| `Status` | Enum | `Pendente`, `Concluída` |
+| `Lista` | Enum | `A fazer`, `Concluídas`, `Plano da semana` ou os nomes exatos das listas do Google Tasks |
+
+Use **Input mode = Dropdown** e deixe **Allow other values** desativado. Use `Enum`, e não `EnumList`, porque cada registro deve receber apenas uma opção. Em `Status`, use valor inicial `Pendente`. Os nomes de `Lista` precisam coincidir exatamente com os nomes existentes no Google Tasks.
 
 Para nova tarefa, use `Tipo = Tarefa`, `Título`, `Lista` e, opcionalmente, `Início` e `Status`. Para novo evento, use `Tipo = Evento único`, `Título`, `Início` e, opcionalmente, `Fim`.
 
