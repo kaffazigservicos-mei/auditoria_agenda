@@ -60,11 +60,38 @@ Em **App → Views** ou **UX → Views**, crie uma View para cada Slice:
 
 Na View de tarefas, mostre `Título`, `Início`, `Lista` e `Status`. Não use `ID` como cabeçalho visível; ele deve permanecer como chave técnica.
 
+## Inclusão de registros pelo celular
+
+Para o botão `+` funcionar, em **Data → Tables → Página1**, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. Não use `UPDATES_ONLY` nem `READ_ONLY`.
+
+Nas Slices usadas pelas Views de inclusão, mantenha estas colunas:
+
+```text
+ID, _RowNumber, Título, Início, Fim, Tipo, Origem, Lista, Status
+```
+
+Nas configurações de colunas de `Página1`, use:
+
+| Coluna | Show? | Editable? | Observação |
+|---|---:|---:|---|
+| `ID` | Não | Não | Key; valor inicial `UNIQUEID()` para linhas novas |
+| `Título` | Sim | Sim | Campo principal |
+| `Início` | Sim | Sim | Obrigatório para eventos; opcional para tarefas |
+| `Fim` | Sim | Sim | Opcional; evento usa uma hora se ficar vazio |
+| `Tipo` | Sim | Sim | Evento único, Evento recorrente ou Tarefa |
+| `Origem` | Não | Não | Preenchido pela sincronização |
+| `Lista` | Sim | Sim | Necessário para novas tarefas |
+| `Status` | Sim | Sim | Pendente ou Concluída; padrão Pendente |
+
+No formulário, deixe a ordem `Título`, `Tipo`, `Início`, `Fim`, `Lista`, `Status`. O formulário pode ser criado automaticamente pelo AppSheet quando o usuário toca em `+`.
+
+Para nova tarefa, use `Tipo = Tarefa`, `Título`, `Lista` e, opcionalmente, `Início` e `Status`. Para novo evento, use `Tipo = Evento único`, `Título`, `Início` e, opcionalmente, `Fim`.
+
 ## Edição bidirecional
 
 No celular, altere somente `Título`, `Início`, `Fim` e `Status` de registros existentes. A próxima execução do gatilho enviará as alterações para Calendar/Tasks.
 
-Para criar uma nova tarefa, adicione uma linha com `Tipo = Tarefa`, um `Título`, uma `Lista` e, opcionalmente, `Início` e `Status`. Para criar um evento, use `Tipo = Evento único`, `Título`, `Início` e `Fim`.
+Para criar uma nova tarefa pelo formulário do celular, use `Tipo = Tarefa`, um `Título`, uma `Lista` válida e, opcionalmente, `Início` e `Status`. Para criar um evento, use `Tipo = Evento único`, `Título`, `Início` e, opcionalmente, `Fim`. Depois de salvar, toque em `Sync`; o Apps Script enviará a nova linha para o Google Tasks ou Google Calendar na próxima execução.
 
 Não apague linhas para excluir objetos Google: a exclusão automática está desativada por segurança.
 

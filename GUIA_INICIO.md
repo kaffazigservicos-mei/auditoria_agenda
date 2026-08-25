@@ -156,19 +156,40 @@ AND([Tipo] = "Tarefa", [Status] = "Concluída")
 
 Em todas as Slices inclua obrigatoriamente a coluna `ID`, pois ela é a chave da tabela principal. Em **UX → Views** ou **App → Views**, crie Views do tipo Deck ou Table para `Eventos`, `Tarefas`, `Tarefas pendentes` e `Tarefas concluídas`. Use `Título` como cabeçalho, `Início` como informação secundária e `Status` ou `Origem` como resumo.
 
-## 10. Configurar a página Sobre
+## 10. Permitir a criação de eventos e tarefas pelo celular
+
+Para o botão `+` abrir um formulário com campos preenchíveis, em **Data → Tables → Página1**, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. Não use `UPDATES_ONLY` nem `READ_ONLY`.
+
+Em **Data → Columns → Página1**, deixe **Show?** e **Editable?** ligados para `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
+
+O formulário deve apresentar, preferencialmente, estes campos nesta ordem:
+
+```text
+Título
+Tipo
+Início
+Fim
+Lista
+Status
+```
+
+Para criar um evento, escolha `Tipo = Evento único`, preencha `Título` e `Início` e, se quiser, `Fim`. Para criar uma tarefa, escolha `Tipo = Tarefa`, preencha `Título` e `Lista` e, se quiser, `Início` e `Status`. A Slice usada pela View também precisa conter esses campos.
+
+Se o botão `+` abrir uma tela vazia, verifique se a tabela ou a Slice está em modo somente leitura, se existe `Editable_If = FALSE` ou se os campos foram retirados da Slice. Depois de salvar o editor, toque em `Sync` no celular. Veja o procedimento completo em [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md).
+
+## 11. Configurar a página Sobre
 
 Adicione a aba `Sobre` como tabela no AppSheet e crie uma View do tipo `Detail` chamada `Sobre o app`. Mostre apenas `Título`, `Descrição` e `Crédito`. O campo `Crédito` deve ser preenchido pelo criador da instalação, por exemplo `Criado por [nome do criador]`.
 
 A conta Google exibida no menu nativo do AppSheet pertence à sessão autenticada e não pode ser substituída pelo branding.
 
-## 11. Política de conflito
+## 12. Política de conflito
 
 A sincronização trabalha com o último snapshot salvo pelo script. Se uma linha for alterada no AppSheet, essa versão será enviada à fonte na execução seguinte. Depois, a fonte será lida novamente e a `Página1` será reconstruída com o estado confirmado.
 
 Se alguém alterar diretamente Calendar ou Tasks antes da próxima execução, a alteração externa será importada. Se o AppSheet e a fonte forem alterados entre duas execuções, a alteração detectada na `Página1` será enviada nesta execução; por isso, evite editar simultaneamente o mesmo registro nos dois lugares.
 
-## 12. Dificuldades comuns
+## 13. Dificuldades comuns
 
 | Problema | Causa provável | Solução |
 |---|---|---|
@@ -185,7 +206,7 @@ Se alguém alterar diretamente Calendar ou Tasks antes da próxima execução, a
 | Eventos do próximo exercício não aparecem | O período do Apps Script ou a Slice ainda está configurado para 2026 | Atualize `DATA_INICIO` e `DATA_FIM`; nos próximos exercícios, use somente `[Início] >= TODAY()` na Slice |
 | Texto da capa é cortado | Imagem fora da área segura | Use `capa_auditoria_agenda_16x9.png` ou `capa_auditoria_agenda_safe.png` |
 
-## 13. Manutenção e atualização para os próximos exercícios
+## 14. Manutenção e atualização para os próximos exercícios
 
 A versão atual está configurada para o exercício de **2026** e para eventos únicos a partir de **1º de agosto de 2026**. Esse corte de agosto é exclusivo de 2026. Para continuar usando o app em um próximo exercício, a importação deve começar em janeiro e a View deve mostrar eventos únicos a partir de hoje; atualize os dois lugares abaixo.
 

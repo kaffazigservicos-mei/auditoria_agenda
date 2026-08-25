@@ -257,7 +257,33 @@ Em **UX → Views** ou **App → Views**, crie estas Views:
 
 Use o tipo de View `Deck` ou `Table`. Mostre `Título`, `Início`, `Lista` e `Status`. Não use `ID` como título visível; ele é uma chave técnica.
 
-## Passo 11 — Salvar e atualizar o celular
+## Passo 11 — Permitir a criação pelo celular
+
+Para o botão `+` abrir um formulário funcional:
+
+1. Abra **Data → Tables → Página1**.
+2. Em **Are updates allowed?**, escolha `ADDS_AND_UPDATES` ou `ALL_CHANGES`.
+3. Não use `UPDATES_ONLY` nem `READ_ONLY`.
+4. Em **Data → Columns → Página1**, deixe **Show?** e **Editable?** ligados para `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
+5. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
+6. Confira se a Slice da View contém `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
+
+A ordem recomendada no formulário é:
+
+```text
+Título
+Tipo
+Início
+Fim
+Lista
+Status
+```
+
+Para criar um evento, escolha `Tipo = Evento único`, preencha `Título` e `Início` e, se quiser, `Fim`. Para criar uma tarefa, escolha `Tipo = Tarefa`, preencha `Título` e `Lista` e, se quiser, `Início` e `Status`.
+
+Se o botão `+` abrir uma tela sem campos, verifique se a tabela está em modo somente leitura, se existe `Editable_If = FALSE` ou se os campos foram retirados da Slice. O guia detalhado está em [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md).
+
+## Passo 12 — Salvar e atualizar o celular
 
 1. No editor do AppSheet, clique em **Save**.
 2. Se o app pedir uma verificação de implantação, abra **Manage → Deploy** e conclua a verificação.
@@ -270,7 +296,7 @@ O celular mantém uma cópia local da definição e dos dados. Por isso, salvar 
 
 Se o nome antigo continuar na barra inferior, verifique se a View está com `Position = Primary`, se o nome foi salvo e se o celular abriu o mesmo app, e não um link antigo ou uma cópia.
 
-## Passo 12 — Ativar a sincronização automática
+## Passo 13 — Ativar a sincronização automática
 
 Depois de a primeira sincronização funcionar:
 
@@ -283,7 +309,7 @@ Depois de a primeira sincronização funcionar:
 
 O intervalo é aproximado. O gatilho executa na conta que o criou, por isso essa conta precisa ter acesso de edição à planilha, ao Calendar e ao Tasks.
 
-## Passo 13 — Fazer um teste seguro
+## Passo 14 — Fazer um teste seguro
 
 Não comece pelos seus registros mais importantes. Use um evento e uma tarefa de teste.
 
