@@ -62,7 +62,7 @@ Na View de tarefas, mostre `Título`, `Início`, `Lista` e `Status`. Não use `I
 
 ## Inclusão de registros pelo celular
 
-Para o botão `+` funcionar, em **Data → Tables → Página1**, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. Não use `UPDATES_ONLY` nem `READ_ONLY`.
+Para o botão `+` funcionar, abra **Data → Tables → Página1** e clique no ícone de **Table settings** no cabeçalho da tabela. Dentro dele, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. No novo editor, essa opção não aparece diretamente na lista de tabelas. Não use `UPDATES_ONLY` nem `READ_ONLY`.
 
 Nas Slices usadas pelas Views de inclusão, mantenha estas colunas:
 

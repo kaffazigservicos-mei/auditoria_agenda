@@ -164,7 +164,7 @@ A View que deve aparecer na barra inferior precisa ter `Position = Primary`.
 
 ### Inclusão de eventos e tarefas pelo celular
 
-Para o botão `+` abrir um formulário funcional, em **Data → Tables → Página1**, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. Não use `UPDATES_ONLY` nem `READ_ONLY`.
+Para o botão `+` abrir um formulário funcional, abra **Data → Tables → Página1** e clique no ícone de **Table settings** no cabeçalho da tabela. Dentro dele, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. No novo editor, essa opção não aparece diretamente na lista de tabelas. Não use `UPDATES_ONLY` nem `READ_ONLY`.
 
 As colunas `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status` devem estar com **Show?** e **Editable?** ligados. `ID`, `_RowNumber` e `Origem` podem ficar ocultos e não editáveis. A ordem recomendada do formulário é:
 

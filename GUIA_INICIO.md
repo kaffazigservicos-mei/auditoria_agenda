@@ -158,7 +158,7 @@ Em todas as Slices inclua obrigatoriamente a coluna `ID`, pois ela é a chave da
 
 ## 10. Permitir a criação de eventos e tarefas pelo celular
 
-Para o botão `+` abrir um formulário com campos preenchíveis, em **Data → Tables → Página1**, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. Não use `UPDATES_ONLY` nem `READ_ONLY`.
+Para o botão `+` abrir um formulário com campos preenchíveis, abra **Data → Tables → Página1** e clique no ícone de **Table settings** no cabeçalho da tabela. Dentro dele, configure **Are updates allowed?** como `ADDS_AND_UPDATES` ou `ALL_CHANGES`. No novo editor, essa opção não aparece diretamente na lista de tabelas. Não use `UPDATES_ONLY` nem `READ_ONLY`.
 
 Em **Data → Columns → Página1**, deixe **Show?** e **Editable?** ligados para `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
 

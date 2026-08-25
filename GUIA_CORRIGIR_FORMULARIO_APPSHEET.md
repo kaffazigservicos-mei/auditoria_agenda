@@ -12,10 +12,14 @@ No editor do AppSheet:
 
 1. Abra **Data → Tables**.
 2. Selecione a tabela `Página1`.
-3. Em **Are updates allowed?**, selecione `ALL_CHANGES`.
-4. Salve.
+3. No cabeçalho da tabela, clique no ícone de **Table settings** — normalmente aparece como uma engrenagem, controles ou três pontos ao lado do nome da tabela.
+4. Dentro de **Table settings**, localize **Are updates allowed?**.
+5. Selecione `ALL_CHANGES`.
+6. Salve.
 
 Se o app não deve permitir exclusões, use `ADDS_AND_UPDATES` em vez de `ALL_CHANGES`. O importante é não usar `UPDATES_ONLY` nem `READ_ONLY`, pois essas opções impedem a criação pelo botão `+`.
+
+Se o ícone de **Table settings** não aparecer, expanda o painel da tabela ou abra o menu de três pontos no cabeçalho. Você pode estar no novo editor; nesse editor, a permissão não fica visível diretamente na lista de tabelas.
 
 Depois confira cada Slice usada nas Views:
 

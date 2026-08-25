@@ -262,11 +262,16 @@ Use o tipo de View `Deck` ou `Table`. Mostre `Título`, `Início`, `Lista` e `St
 Para o botão `+` abrir um formulário funcional:
 
 1. Abra **Data → Tables → Página1**.
-2. Em **Are updates allowed?**, escolha `ADDS_AND_UPDATES` ou `ALL_CHANGES`.
-3. Não use `UPDATES_ONLY` nem `READ_ONLY`.
-4. Em **Data → Columns → Página1**, deixe **Show?** e **Editable?** ligados para `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
-5. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
-6. Confira se a Slice da View contém `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
+2. No cabeçalho da tabela, clique no ícone de **Table settings** — pode aparecer como engrenagem, controles ou três pontos.
+3. Dentro de **Table settings**, localize **Are updates allowed?**.
+4. Escolha `ADDS_AND_UPDATES` ou `ALL_CHANGES`.
+5. Não use `UPDATES_ONLY` nem `READ_ONLY`.
+
+No novo editor, `Are updates allowed?` não aparece diretamente na lista principal de tabelas; ele fica dentro de **Table settings**.
+
+6. Em **Data → Columns → Página1**, deixe **Show?** e **Editable?** ligados para `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
+7. Mantenha `ID`, `_RowNumber` e `Origem` ocultos e não editáveis.
+8. Confira se a Slice da View contém `Título`, `Tipo`, `Início`, `Fim`, `Lista` e `Status`.
 
 A ordem recomendada no formulário é:
 
