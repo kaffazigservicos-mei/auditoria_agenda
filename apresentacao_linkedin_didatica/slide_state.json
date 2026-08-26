@@ -2,8 +2,8 @@
   "project_info": {
     "title": "Crie sua própria Auditoria Agenda",
     "created": 1787682616.412,
-    "last_updated": 1787682822.824,
-    "total_slides": 9
+    "last_updated": 1787758115.106,
+    "total_slides": 10
   },
   "slides": [
     {
@@ -50,6 +50,11 @@
       "id": "slide8",
       "state": "edited",
       "pageNum": 9
+    },
+    {
+      "id": "slide9",
+      "state": "edited",
+      "pageNum": 10
     }
   ],
   "outline": [
@@ -106,6 +111,12 @@
       "title": "Auditoria Agenda: clareza para agir",
       "summary": "Encerramento com chamada para o repositório no GitHub e o rodapé institucional.",
       "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "slide9",
+      "title": "Auditoria Agenda: clareza para agir",
+      "summary": "Encerramento com chamada para conhecer o projeto e começar com um evento e uma tarefa de teste.",
+      "image_plan": "Use a minimal closing composition consistent with the previous generated slide and the premium brand identity."
     }
   ]
 }

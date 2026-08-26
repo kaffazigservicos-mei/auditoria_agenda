@@ -257,6 +257,37 @@ Em **UX → Views** ou **App → Views**, crie estas Views:
 
 Use o tipo de View `Deck` ou `Table`. Mostre `Título`, `Início`, `Lista` e `Status`. Não use `ID` como título visível; ele é uma chave técnica.
 
+## Duas formas de cadastrar
+
+O cadastro pode começar pelo AppSheet ou diretamente nas ferramentas Google. A sincronização bidirecional leva o registro para a planilha e para o outro ambiente.
+
+| Onde começar | O que fazer |
+|---|---|
+| AppSheet | Toque em `+`, escolha `Evento` ou `Tarefa`, preencha os campos, salve e toque em `Sync` |
+| Google Calendar | Crie o evento com data e horário; depois aguarde o Apps Script importar para a planilha e o app |
+| Google Tasks | Crie a tarefa, escolha a lista e defina prazo/status; depois aguarde o Apps Script importar para a planilha e o app |
+
+Use o Calendar para compromissos com horário e o Tasks para ações que precisam ser concluídas. A sincronização não exige que todos cadastrem pelo mesmo lugar.
+
+## Como decidir entre evento e tarefa
+
+> **Evento** ocupa um horário específico. **Tarefa** é uma ação que precisa ser concluída até um prazo.
+
+Use esta regra simples:
+
+| Se a situação... | Registre como... |
+|---|---|
+| tem horário marcado, reunião, compromisso ou outras pessoas envolvidas | **Evento** |
+| é uma ação que pode ser feita em qualquer momento antes do prazo | **Tarefa** |
+
+Exemplos de eventos são reunião, consulta, apresentação, treinamento e visita técnica. Exemplos de tarefas são preparar uma apresentação, enviar uma proposta, revisar um orçamento e atualizar um relatório.
+
+No app, evento usa `Tipo = Evento único` ou `Evento recorrente`, com `Início` e, se possível, `Fim`. Tarefa usa `Tipo = Tarefa`, uma `Lista` do Google Tasks e `Status = Pendente`; `Início` pode ser usado como prazo.
+
+Se uma tarefa precisar de horário reservado, use os dois registros: uma tarefa para acompanhar a entrega e um evento para reservar o tempo de execução.
+
+A explicação detalhada, com mais exemplos e orientações para cadastrar diretamente no Google Calendar ou no Google Tasks, está no documento [`GUIA_DIFERENCIAR_EVENTO_TAREFA.md`](GUIA_DIFERENCIAR_EVENTO_TAREFA.md).
+
 ## Passo 11 — Permitir a criação pelo celular
 
 Para o botão `+` abrir um formulário funcional:

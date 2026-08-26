@@ -134,6 +134,18 @@ AND([Tipo] = "Tarefa", [Status] = "Concluída")
 
 Se a instalação não quiser importar tarefas concluídas para a planilha, altere `INCLUIR_TAREFAS_CONCLUIDAS` para `false`. Nesse caso, elas não aparecerão nem na `Página1` nem na View de concluídas.
 
+## Duas formas de cadastrar eventos e tarefas
+
+A Auditoria Agenda aceita dois caminhos de cadastro. A pessoa pode começar pelo **AppSheet**, usando o botão `+`, ou pode criar diretamente no **Google Calendar** e no **Google Tasks**. Nos dois casos, a sincronização leva o registro para a `Página1` e o torna visível no outro ambiente.
+
+| Onde cadastrar | Para eventos | Para tarefas | Depois do cadastro |
+|---|---|---|---|
+| AppSheet | Escolha `Evento único` ou `Evento recorrente`, preencha `Título`, `Início` e `Fim` | Escolha `Tarefa`, selecione a `Lista` e defina `Status` | Salve e toque em `Sync` no celular; o Apps Script envia à fonte Google |
+| Google Calendar | Crie o evento com data e horário | — | O Apps Script importa o evento para a `Página1` e o AppSheet |
+| Google Tasks | — | Crie a tarefa, escolha a lista, o prazo e o status | O Apps Script importa a tarefa para a `Página1` e o AppSheet |
+
+A regra prática é usar o Calendar para compromissos com horário e o Tasks para ações que precisam ser concluídas. A diferenciação detalhada está em [`GUIA_DIFERENCIAR_EVENTO_TAREFA.md`](GUIA_DIFERENCIAR_EVENTO_TAREFA.md).
+
 ## Configuração do AppSheet
 
 Em **Data → Tables**, selecione `Página1` e execute **Regenerate structure** ou **Regenerate schema**. Depois, em **Data → Columns**, configure:
@@ -238,7 +250,9 @@ Para uma instalação passo a passo, inclusive para quem tem pouca familiaridade
 - [`GUIA_INICIO.md`](GUIA_INICIO.md) — guia operacional da instalação bidirecional.
 - [`APPSHEET_CONFIG_BIDIRECTIONAL.md`](APPSHEET_CONFIG_BIDIRECTIONAL.md) — configuração detalhada de Slices e Views.
 - [`GUIA_CORRIGIR_FORMULARIO_APPSHEET.md`](GUIA_CORRIGIR_FORMULARIO_APPSHEET.md) — correção do botão `+` e dos campos do formulário móvel.
-- [`apresentacao_linkedin_didatica/`](apresentacao_linkedin_didatica/) — nova apresentação didática em nove slides, com linguagem de gestão de projetos.
+- [`GUIA_DIFERENCIAR_EVENTO_TAREFA.md`](GUIA_DIFERENCIAR_EVENTO_TAREFA.md) — como decidir entre evento e tarefa e quando usar Calendar, Tasks ou os dois.
+- [`APRESENTACAO_LINKEDIN_DIDATICA.md`](APRESENTACAO_LINKEDIN_DIDATICA.md) — roteiro textual atualizado, com cadastro pelo AppSheet ou diretamente pelas ferramentas Google.
+- [`apresentacao_linkedin_didatica/`](apresentacao_linkedin_didatica/) — apresentação didática com cadastro pelos dois caminhos e sincronização bidirecional.
 - [`apresentacao_linkedin/`](apresentacao_linkedin/) — versão premium anterior, mantida como referência visual.
 
 ## Teste recomendado
@@ -282,10 +296,11 @@ Um repositório público contém o código, mas não concede automaticamente ace
 | `GUIA_INICIO.md` | Guia operacional completo |
 | `APPSHEET_CONFIG_BIDIRECTIONAL.md` | Slices, Views e campos editáveis |
 | `GUIA_CORRIGIR_FORMULARIO_APPSHEET.md` | Permissões de inclusão e formulário do celular |
+| `GUIA_DIFERENCIAR_EVENTO_TAREFA.md` | Critérios para diferenciar eventos e tarefas e escolher o caminho de cadastro |
 | `test_auditoria_bidirectional.js` | Testes da integração bidirecional |
 | `test_auditoria_write_mocks.js` | Testes simulados de escrita no Calendar e Tasks |
 | `README.md` | Referência rápida |
-| `apresentacao_linkedin_didatica/` | Nova apresentação didática em nove slides para o LinkedIn |
+| `apresentacao_linkedin_didatica/` | Apresentação didática para o LinkedIn, com cadastro pelo app e pelas fontes Google |
 | `APRESENTACAO_LINKEDIN_DIDATICA.md` | Roteiro textual da apresentação didática |
 | `apresentacao_linkedin/` | Apresentação premium anterior e referência visual |
 
