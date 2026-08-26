@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title desc">
   <title id="title">Símbolo branco Kaffa Zig Gestão</title>
-  <desc id="desc">Símbolo branco minimalista de gestão e gestão de projetos.</desc>
-  <g fill="none" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M72 58V310M72 184L230 58M96 276L230 184"/>
-    <path d="M174 250L222 298L332 170" stroke-width="44"/>
-  </g>
+  <desc id="desc">Símbolo branco premium para gestão e gestão de projetos.</desc>
+  <polygon points="280,72 326,72 150,282 104,282" fill="#FFFFFF"/>
+  <rect x="58" y="42" width="270" height="58" rx="18" fill="#FFFFFF"/>
+  <rect x="58" y="242" width="270" height="58" rx="18" fill="#FFFFFF"/>
+  <path d="M178 264L218 304L324 184" fill="none" stroke="#FFFFFF" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

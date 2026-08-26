@@ -1,6 +1,6 @@
 # Manual de marca — Kaffa Zig Gestão
 
-**Versão 1.1 — revisão minimalista, agosto de 2026**
+**Versão 1.2 — revisão estética final, agosto de 2026**
 
 ## 1. Papel da marca
 
@@ -39,13 +39,9 @@ A assinatura editorial não deve ser confundida com o crédito da instalação. 
 
 ## 4. Conceito do logo
 
-O símbolo usa uma forma reduzida de **K** combinada com uma única marca de confirmação. Ele representa três ideias:
+O símbolo combina um **Z geométrico** com uma confirmação coral integrada. O Z representa organização, direção e avanço; a confirmação coral representa uma decisão ou entrega concluída. A construção foi reduzida a formas sólidas, com proporções controladas e sem linhas decorativas sem função.
 
-1. direção e organização;
-2. decisão e acompanhamento;
-3. entrega concluída.
-
-A simplicidade é intencional: o símbolo deve ser reconhecido rapidamente e continuar legível em um ícone pequeno.
+A simplicidade é intencional: o símbolo precisa funcionar em ícone, tela pequena, documento e apresentação. O contraste entre azul-marinho e coral cria uma assinatura institucional limpa, sem usar ciano ou azul-claro como destaque.
 
 O símbolo pode ser usado sozinho em ícone de aplicativo, favicon, avatar e espaço reduzido. O logo completo deve ser usado quando houver espaço para o nome institucional.
 
@@ -60,7 +56,7 @@ O símbolo pode ser usado sozinho em ícone de aplicativo, favicon, avatar e esp
 | `logo_kaffa_zig_gestao_simbolo_clean.png` | Símbolo PNG com transparência real |
 | `logo_kaffa_zig_gestao_branco_clean.png` | Símbolo PNG branco com transparência real |
 
-O logo principal tem a composição horizontal: símbolo à esquerda, nome **Kaffa Zig Gestão** e assinatura **Gestão com IAs** abaixo do nome. Não reescreva o nome em outra fonte quando o arquivo oficial estiver disponível.
+O logo principal tem composição horizontal: símbolo à esquerda, nome **Kaffa Zig Gestão** e assinatura **GESTÃO • PROJETOS** abaixo do nome. Não reescreva o nome em outra fonte quando o arquivo oficial estiver disponível.
 
 ![Logo principal](logo_kaffa_zig_gestao_principal.svg)
 
@@ -68,14 +64,15 @@ O logo principal tem a composição horizontal: símbolo à esquerda, nome **Kaf
 
 ## 6. Cores
 
-A paleta combina um fundo azul-marinho sóbrio com acentos luminosos para indicar movimento, destaque e conclusão.
+A identidade institucional combina azul-marinho profundo com coral para comunicar organização, decisão e conclusão. Azul elétrico e ciano continuam disponíveis apenas como cores auxiliares de produtos digitais, não como destaque do logo institucional.
 
 | Cor | Código | Uso |
 |---|---|---|
 | Azul-marinho profundo | `#071426` | Fundo principal de apresentações e capas |
-| Azul elétrico | `#1D73F5` | Ações, links, tecnologia e destaque principal |
-| Ciano | `#13D5E7` | Conexão, informação e elementos secundários |
-| Coral | `#E84A68` | Ação, prioridade, chamada e confirmação |
+| Azul-marinho institucional | `#0B1F45` | Símbolo, nome e elementos institucionais do logo |
+| Azul elétrico | `#1D73F5` | Ações, links, tecnologia e destaque em produtos |
+| Ciano | `#13D5E7` | Cor auxiliar de produtos; não usar como destaque no logo institucional |
+| Coral | `#E8536C` | Ação, prioridade, chamada e confirmação |
 | Branco suave | `#F4F7FB` | Texto principal sobre fundo escuro |
 | Cinza azulado | `#A9B7CC` | Texto auxiliar e informações secundárias |
 
@@ -104,8 +101,8 @@ Mantenha ao redor do logo uma área livre equivalente à altura do traço inferi
 
 | Versão | Tamanho mínimo recomendado |
 |---|---:|
-| Logo horizontal em tela | 180 px de largura |
-| Logo horizontal em impressão | 45 mm de largura |
+| Logo horizontal em tela | 240 px de largura |
+| Logo horizontal em impressão | 55 mm de largura |
 | Símbolo quadrado em tela | 32 px |
 | Símbolo quadrado em impressão | 10 mm |
 
@@ -144,7 +141,7 @@ Uma composição recomendada para capa é:
 Criado por Kaffa Zig Gestão com IAs
 ```
 
-O produto pode manter a identidade azul-marinho, azul elétrico, coral e ciano usada nos materiais da Auditoria Agenda, mas o logo institucional novo usa somente azul-marinho e coral. Marca institucional e marca de produto devem ser reconhecíveis sem competir entre si.
+O produto pode manter a identidade azul-marinho, azul elétrico, coral e ciano usada nos materiais da Auditoria Agenda, mas o logo institucional novo usa somente azul-marinho institucional e coral. Marca institucional e marca de produto devem ser reconhecíveis sem competir entre si.
 
 ## 11. Comunicação para gestão de projetos
 

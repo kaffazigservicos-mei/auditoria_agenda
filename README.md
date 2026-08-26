@@ -272,7 +272,7 @@ Não apague linhas durante o teste. A exclusão automática está desativada.
 
 ## Marca e identidade visual
 
-O manual [`MANUAL_DE_MARCA_KAFFA_ZIG.md`](MANUAL_DE_MARCA_KAFFA_ZIG.md) reúne as regras de uso da marca Kaffa Zig Gestão, cujo foco principal é **gestão, incluindo gestão de projetos**. As soluções digitais e o uso de IA são atividades e recursos complementares. O logo institucional novo é minimalista e usa apenas azul-marinho e coral; o azul-claro/ciano não é destaque da marca institucional. Os logos oficiais estão disponíveis na raiz do repositório:
+O manual [`MANUAL_DE_MARCA_KAFFA_ZIG.md`](MANUAL_DE_MARCA_KAFFA_ZIG.md) reúne as regras de uso da marca Kaffa Zig Gestão, cujo foco principal é **gestão, incluindo gestão de projetos**. As soluções digitais e o uso de IA são atividades e recursos complementares. O logo institucional novo combina um símbolo Z geométrico com uma confirmação coral, usa apenas azul-marinho e coral e traz a assinatura `GESTÃO • PROJETOS`; o azul-claro/ciano não é destaque da marca institucional. Os logos oficiais estão disponíveis na raiz do repositório:
 
 - [`logo_kaffa_zig_gestao_principal.svg`](logo_kaffa_zig_gestao_principal.svg) — versão horizontal vetorial;
 - [`logo_kaffa_zig_gestao_simbolo.svg`](logo_kaffa_zig_gestao_simbolo.svg) — símbolo vetorial para ícones;
