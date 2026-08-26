@@ -270,6 +270,17 @@ Use primeiro um evento e uma tarefa com título iniciado por `TESTE BIDIRECIONAL
 
 Não apague linhas durante o teste. A exclusão automática está desativada.
 
+## Marca e identidade visual
+
+O manual [`MANUAL_DE_MARCA_KAFFA_ZIG.md`](MANUAL_DE_MARCA_KAFFA_ZIG.md) reúne as regras de uso da marca Kaffa Zig Gestão, da linha de aplicativos e do produto Auditoria Agenda. Os logos oficiais estão disponíveis na raiz do repositório:
+
+- [`logo_kaffa_zig_gestao_principal.svg`](logo_kaffa_zig_gestao_principal.svg) — versão horizontal vetorial;
+- [`logo_kaffa_zig_gestao_simbolo.svg`](logo_kaffa_zig_gestao_simbolo.svg) — símbolo vetorial para ícones;
+- [`logo_kaffa_zig_gestao_simbolo_branco.svg`](logo_kaffa_zig_gestao_simbolo_branco.svg) — símbolo branco vetorial para fundos escuros;
+- [`logo_kaffa_zig_gestao_principal_clean.png`](logo_kaffa_zig_gestao_principal_clean.png) — versão horizontal PNG transparente;
+- [`logo_kaffa_zig_gestao_simbolo_clean.png`](logo_kaffa_zig_gestao_simbolo_clean.png) — símbolo PNG transparente;
+- [`logo_kaffa_zig_gestao_branco_clean.png`](logo_kaffa_zig_gestao_branco_clean.png) — símbolo branco PNG transparente.
+
 ## Segurança
 
 ### Limitação de segurança do plano gratuito
@@ -303,6 +314,10 @@ Um repositório público contém o código, mas não concede automaticamente ace
 | `apresentacao_linkedin_didatica/` | Apresentação didática para o LinkedIn, com cadastro pelo app e pelas fontes Google |
 | `APRESENTACAO_LINKEDIN_DIDATICA.md` | Roteiro textual da apresentação didática |
 | `apresentacao_linkedin/` | Apresentação premium anterior e referência visual |
+| `MANUAL_DE_MARCA_KAFFA_ZIG.md` | Regras de marca, cores, tipografia, logo e aplicações |
+| `logo_kaffa_zig_gestao_principal_clean.png` | Logo institucional horizontal |
+| `logo_kaffa_zig_gestao_simbolo_clean.png` | Símbolo institucional para ícones e espaços reduzidos |
+| `logo_kaffa_zig_gestao_branco_clean.png` | Símbolo branco para fundos escuros |
 
 ## Dificuldades comuns
 
