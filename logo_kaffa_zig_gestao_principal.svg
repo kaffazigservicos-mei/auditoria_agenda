@@ -1,12 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 360" role="img" aria-labelledby="title desc">
   <title id="title">Kaffa Zig Gestão</title>
-  <desc id="desc">Logo institucional com símbolo de conexão, organização e ação.</desc>
+  <desc id="desc">Logo institucional minimalista para gestão e gestão de projetos.</desc>
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M62 54V270M62 168L188 54M92 274L294 72" stroke="#102C67" stroke-width="48"/>
-    <path d="M150 315L285 180" stroke="#1D73F5" stroke-width="48"/>
-    <path d="M62 296V360H330" stroke="#13D5E7" stroke-width="48"/>
-    <path d="M224 275L260 311L338 222" stroke="#E84A68" stroke-width="42"/>
+    <path d="M62 58V302M62 180L222 58M92 270L222 180" stroke="#102C67" stroke-width="54"/>
+    <path d="M174 244L224 292L334 166" stroke="#E84A68" stroke-width="42"/>
   </g>
-  <text x="420" y="176" fill="#102C67" font-family="Sora, Inter, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="-1">Kaffa Zig Gestão</text>
-  <text x="425" y="248" fill="#1D73F5" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600">Gestão com IAs</text>
+  <text x="430" y="166" fill="#102C67" font-family="Sora, Inter, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="-1">Kaffa Zig Gestão</text>
+  <text x="435" y="238" fill="#102C67" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600">Gestão e gestão de projetos</text>
 </svg>

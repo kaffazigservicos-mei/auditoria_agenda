@@ -1,12 +1,14 @@
 # Manual de marca — Kaffa Zig Gestão
 
-**Versão 1.0 — agosto de 2026**
+**Versão 1.1 — revisão minimalista, agosto de 2026**
 
 ## 1. Papel da marca
 
-A **Kaffa Zig Gestão** cria soluções digitais simples para organizar rotinas, projetos, compromissos e ações. A marca deve transmitir clareza, método, proximidade e uso responsável de inteligência artificial.
+A **Kaffa Zig Gestão** atua principalmente com **gestão, incluindo gestão de projetos**. A marca também desenvolve soluções digitais e utiliza inteligência artificial como apoio para organizar informações, rotinas, compromissos e ações.
 
-> **Promessa de marca:** transformar informação espalhada em próximos passos claros.
+> **Posicionamento:** gestão clara para transformar objetivos em planos, decisões e entregas.
+
+As ferramentas digitais não definem sozinhas a atividade da marca. Elas são meios de apoio à gestão e podem aparecer como produtos, serviços ou recursos complementares.
 
 A comunicação deve ser compreendida por pessoas que não trabalham com tecnologia. Sempre que uma palavra técnica for indispensável, explique seu significado na primeira vez em que aparecer.
 
@@ -37,11 +39,13 @@ A assinatura editorial não deve ser confundida com o crédito da instalação. 
 
 ## 4. Conceito do logo
 
-O símbolo combina uma forma abstrata de **K/Z**, linhas conectadas e um movimento de confirmação. Ele representa três ideias:
+O símbolo usa uma forma reduzida de **K** combinada com uma única marca de confirmação. Ele representa três ideias:
 
-1. informação conectada;
-2. organização da rotina;
-3. ação concluída ou encaminhada.
+1. direção e organização;
+2. decisão e acompanhamento;
+3. entrega concluída.
+
+A simplicidade é intencional: o símbolo deve ser reconhecido rapidamente e continuar legível em um ícone pequeno.
 
 O símbolo pode ser usado sozinho em ícone de aplicativo, favicon, avatar e espaço reduzido. O logo completo deve ser usado quando houver espaço para o nome institucional.
 
@@ -71,11 +75,11 @@ A paleta combina um fundo azul-marinho sóbrio com acentos luminosos para indica
 | Azul-marinho profundo | `#071426` | Fundo principal de apresentações e capas |
 | Azul elétrico | `#1D73F5` | Ações, links, tecnologia e destaque principal |
 | Ciano | `#13D5E7` | Conexão, informação e elementos secundários |
-| Coral-magenta | `#E84A68` | Ação, prioridade, chamada e contraste |
+| Coral | `#E84A68` | Ação, prioridade, chamada e confirmação |
 | Branco suave | `#F4F7FB` | Texto principal sobre fundo escuro |
 | Cinza azulado | `#A9B7CC` | Texto auxiliar e informações secundárias |
 
-Use no máximo dois acentos fortes na mesma composição. O azul-marinho deve ocupar a maior área em capas e apresentações. Coral-magenta e ciano servem para orientar o olhar, não para preencher todos os elementos.
+Use no máximo duas cores na marca principal: azul-marinho e coral. O azul-marinho é a cor institucional dominante; o coral sinaliza ação, prioridade ou conclusão. **O ciano/azul-claro não faz parte do logo institucional novo** e não deve aparecer como elemento de destaque nessa marca. Ele pode ser usado somente como cor auxiliar em materiais específicos de produtos, quando necessário.
 
 ## 7. Tipografia
 
@@ -140,7 +144,7 @@ Uma composição recomendada para capa é:
 Criado por Kaffa Zig Gestão com IAs
 ```
 
-O produto deve manter a paleta azul-marinho, azul elétrico, coral-magenta e ciano, mas não precisa repetir o símbolo institucional em todos os elementos. Marca institucional e marca de produto devem ser reconhecíveis sem competir entre si.
+O produto pode manter a identidade azul-marinho, azul elétrico, coral e ciano usada nos materiais da Auditoria Agenda, mas o logo institucional novo usa somente azul-marinho e coral. Marca institucional e marca de produto devem ser reconhecíveis sem competir entre si.
 
 ## 11. Comunicação para gestão de projetos
 

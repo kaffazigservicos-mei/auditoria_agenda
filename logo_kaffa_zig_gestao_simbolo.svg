@@ -1,10 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title desc">
   <title id="title">Símbolo Kaffa Zig Gestão</title>
-  <desc id="desc">Símbolo abstrato de conexão, organização e ação.</desc>
+  <desc id="desc">Símbolo minimalista de gestão e gestão de projetos.</desc>
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M62 54V270M62 168L188 54M92 274L294 72" stroke="#102C67" stroke-width="48"/>
-    <path d="M150 315L285 180" stroke="#1D73F5" stroke-width="48"/>
-    <path d="M62 296V360H330" stroke="#13D5E7" stroke-width="48"/>
-    <path d="M224 275L260 311L338 222" stroke="#E84A68" stroke-width="42"/>
+    <path d="M72 58V310M72 184L230 58M96 276L230 184" stroke="#102C67" stroke-width="58"/>
+    <path d="M174 250L222 298L332 170" stroke="#E84A68" stroke-width="44"/>
   </g>
 </svg>
