@@ -1,6 +1,6 @@
 # Manual de marca — Kaffa Zig Gestão
 
-**Versão 1.2 — revisão estética final, agosto de 2026**
+**Versão 1.3 — identidade visual aprovada, agosto de 2026**
 
 ## 1. Papel da marca
 
@@ -8,13 +8,13 @@ A **Kaffa Zig Gestão** atua principalmente com **gestão, incluindo gestão de 
 
 > **Posicionamento:** gestão clara para transformar objetivos em planos, decisões e entregas.
 
-As ferramentas digitais não definem sozinhas a atividade da marca. Elas são meios de apoio à gestão e podem aparecer como produtos, serviços ou recursos complementares.
+As ferramentas digitais são meios de apoio à gestão. Elas podem aparecer como produtos, serviços ou recursos complementares, mas não substituem a atividade principal da marca: **organizar, coordenar e conduzir a gestão**.
 
-A comunicação deve ser compreendida por pessoas que não trabalham com tecnologia. Sempre que uma palavra técnica for indispensável, explique seu significado na primeira vez em que aparecer.
+A comunicação deve ser compreendida por pessoas que não trabalham com tecnologia. Sempre que uma palavra técnica for indispensável, ela deve ser explicada na primeira vez em que aparecer.
 
-## 2. Personalidade
+## 2. Personalidade e tom de voz
 
-A marca é **organizada, acessível, contemporânea, confiável e prática**. O tom de voz é direto, didático e acolhedor, sem exageros técnicos ou promessas que não possam ser verificadas.
+A marca é **organizada, acessível, contemporânea, confiável e prática**. O tom deve ser direto, didático e acolhedor, sem exageros técnicos ou promessas que não possam ser verificadas.
 
 | Preferir | Evitar |
 |---|---|
@@ -37,50 +37,50 @@ A marca institucional é **Kaffa Zig Gestão**. Os aplicativos são produtos da 
 
 A assinatura editorial não deve ser confundida com o crédito da instalação. No AppSheet, o crédito deve identificar quem criou e configurou aquela instalação específica.
 
-## 4. Conceito do logo
+## 4. Conceito do logo aprovado
 
-O símbolo combina um **Z geométrico** com uma confirmação coral integrada. O Z representa organização, direção e avanço; a confirmação coral representa uma decisão ou entrega concluída. A construção foi reduzida a formas sólidas, com proporções controladas e sem linhas decorativas sem função.
+O logo aprovado é formado por um **G arquitetônico grande**, construído com módulos sólidos e dois eixos cromáticos: azul-marinho e coral. A forma sugere estrutura, organização, coordenação, percurso e integração entre partes — conceitos associados à gestão e à gestão de projetos.
 
-A simplicidade é intencional: o símbolo precisa funcionar em ícone, tela pequena, documento e apresentação. O contraste entre azul-marinho e coral cria uma assinatura institucional limpa, sem usar ciano ou azul-claro como destaque.
+O G grande é o elemento de maior destaque da composição. Ele deve ser percebido antes do wordmark. O azul-marinho estabelece a base institucional; o coral marca a continuidade, a ação e a conexão entre etapas.
 
-O símbolo pode ser usado sozinho em ícone de aplicativo, favicon, avatar e espaço reduzido. O logo completo deve ser usado quando houver espaço para o nome institucional.
+O wordmark apresenta **Kaffa Zig** na primeira linha e **Gestão** na segunda. O pequeno gancho inferior do **g** de “Zig” permanece coral; o pingo do **i** de “Zig” também é coral; o til de “Gestão” é azul-marinho. Esses detalhes fazem parte da arte aprovada e não devem ser reinterpretados.
+
+A sombra é um acabamento visual premium aplicado atrás do G grande e das duas linhas do wordmark. Ela cria separação do fundo branco e profundidade moderada, mas nunca deve encobrir, escurecer ou deformar as letras e os módulos do símbolo.
+
+![Logo aprovado — Kaffa Zig Gestão](logo_final_G_cores_originais_sombras_preservadas.png)
 
 ## 5. Arquivos oficiais
 
 | Arquivo | Uso recomendado |
 |---|---|
-| `logo_kaffa_zig_gestao_principal.svg` | Logo horizontal vetorial, preferencial para redimensionamento |
-| `logo_kaffa_zig_gestao_simbolo.svg` | Símbolo vetorial para ícones e espaços reduzidos |
-| `logo_kaffa_zig_gestao_simbolo_branco.svg` | Símbolo vetorial branco para fundos escuros |
-| `logo_kaffa_zig_gestao_principal_clean.png` | Logo horizontal PNG com transparência real |
-| `logo_kaffa_zig_gestao_simbolo_clean.png` | Símbolo PNG com transparência real |
-| `logo_kaffa_zig_gestao_branco_clean.png` | Símbolo PNG branco com transparência real |
+| `logo_final_G_cores_originais_sombras_preservadas.png` | Referência aprovada do G grande com cores originais e sombra preservada |
+| `logo_final_sombra_gestao_reduzida_sem_cortes.png` | Versão de trabalho com sombra mais suave em “Gestão”; usar somente se a composição estiver aprovada para o contexto |
+| `logo_final_G_cores_originais.png` | Versão-base sem a sombra adicional do wordmark |
+| `logo_kaffa_zig_gestao_principal.svg` | Arquivo vetorial institucional anterior; revisar antes de tratá-lo como versão final |
+| `logo_kaffa_zig_gestao_simbolo.svg` | Símbolo vetorial anterior; revisar antes de tratá-lo como versão final |
+| `logo_kaffa_zig_gestao_simbolo_branco.svg` | Símbolo branco para fundos escuros, sujeito à atualização após aprovação vetorial |
+| `logo_kaffa_zig_gestao_principal_clean.png` | PNG institucional anterior com transparência real |
+| `logo_kaffa_zig_gestao_simbolo_clean.png` | Símbolo PNG anterior com transparência real |
 
-O logo principal tem composição horizontal: símbolo à esquerda, nome **Kaffa Zig Gestão** e assinatura **GESTÃO • PROJETOS** abaixo do nome. Não reescreva o nome em outra fonte quando o arquivo oficial estiver disponível.
+Até que os arquivos vetoriais sejam atualizados, a imagem PNG aprovada deve ser considerada a **referência visual oficial**. Não redesenhe o G em outro programa nem substitua a tipografia por aproximações.
 
-![Logo principal](logo_kaffa_zig_gestao_principal.svg)
+## 6. Cores institucionais
 
-![Símbolo institucional](logo_kaffa_zig_gestao_simbolo.svg)
-
-## 6. Cores
-
-A identidade institucional combina azul-marinho profundo com coral para comunicar organização, decisão e conclusão. Azul elétrico e ciano continuam disponíveis apenas como cores auxiliares de produtos digitais, não como destaque do logo institucional.
+A marca institucional utiliza duas cores principais. O branco funciona como fundo preferencial da composição aprovada.
 
 | Cor | Código | Uso |
 |---|---|---|
-| Azul-marinho profundo | `#071426` | Fundo principal de apresentações e capas |
-| Azul-marinho institucional | `#0B1F45` | Símbolo, nome e elementos institucionais do logo |
-| Azul elétrico | `#1D73F5` | Ações, links, tecnologia e destaque em produtos |
-| Ciano | `#13D5E7` | Cor auxiliar de produtos; não usar como destaque no logo institucional |
-| Coral | `#E8536C` | Ação, prioridade, chamada e confirmação |
-| Branco suave | `#F4F7FB` | Texto principal sobre fundo escuro |
-| Cinza azulado | `#A9B7CC` | Texto auxiliar e informações secundárias |
+| Azul-marinho institucional | `#0B1F45` | G grande, nome, til de “Gestão” e elementos institucionais |
+| Coral institucional | `#E8536C` | Módulo coral do G, pingo do “i”, gancho do “g” e sinais de ação |
+| Branco | `#FFFFFF` | Fundo preferencial do logo aprovado |
 
-Use no máximo duas cores na marca principal: azul-marinho e coral. O azul-marinho é a cor institucional dominante; o coral sinaliza ação, prioridade ou conclusão. **O ciano/azul-claro não faz parte do logo institucional novo** e não deve aparecer como elemento de destaque nessa marca. Ele pode ser usado somente como cor auxiliar em materiais específicos de produtos, quando necessário.
+Use no máximo azul-marinho, coral e branco na marca principal. Ciano e azul-claro não fazem parte do logo institucional aprovado. Eles podem aparecer apenas como cores auxiliares de produtos digitais quando houver uma justificativa funcional.
+
+Não escureça o azul-marinho para criar a sombra. A sombra deve ser uma camada separada, em tom escuro translúcido, atrás do elemento visual.
 
 ## 7. Tipografia
 
-A recomendação é usar uma sans-serif geométrica e legível:
+O arquivo aprovado contém o wordmark já composto. Quando for necessário criar materiais complementares, use uma tipografia sem serifa, limpa e legível, mantendo coerência com o desenho do logo.
 
 | Função | Fonte recomendada | Peso |
 |---|---|---:|
@@ -89,13 +89,13 @@ A recomendação é usar uma sans-serif geométrica e legível:
 | Texto corrido | Inter | 400 ou 500 |
 | Botões e rótulos | Inter | 600 |
 
-Quando essas fontes não estiverem disponíveis, use Arial ou outra sans-serif limpa. Evite fontes manuscritas, excesso de caixa alta e títulos muito longos.
+Quando essas fontes não estiverem disponíveis, use Arial ou outra sans-serif limpa. Não redesenhe “Kaffa Zig Gestão” com uma fonte diferente quando o arquivo oficial estiver disponível.
 
-## 8. Regras do logo
+## 8. Regras de uso do logo
 
 ### Área de proteção
 
-Mantenha ao redor do logo uma área livre equivalente à altura do traço inferior do símbolo. Nenhum texto, botão, borda ou imagem deve invadir esse espaço.
+Mantenha ao redor do conjunto uma área livre equivalente, no mínimo, à altura do módulo horizontal coral do G. Nenhum texto, botão, borda ou imagem deve invadir esse espaço.
 
 ### Tamanho mínimo
 
@@ -106,30 +106,32 @@ Mantenha ao redor do logo uma área livre equivalente à altura do traço inferi
 | Símbolo quadrado em tela | 32 px |
 | Símbolo quadrado em impressão | 10 mm |
 
-Abaixo desses tamanhos, use apenas o símbolo. Nunca reduza o logo até tornar o nome ilegível.
+Abaixo desses tamanhos, use apenas o G grande simplificado, sem exigir a leitura completa do wordmark. Nunca reduza o logo até tornar o nome ilegível.
 
-### Contraste
+### Contraste e sombra
 
-Use o logo colorido sobre fundo branco ou muito claro e a versão branca sobre azul-marinho ou outra superfície escura. Não coloque o logo sobre fotografia muito detalhada sem uma área de proteção visual.
+Use o logo colorido sobre fundo branco ou muito claro. Em fundos escuros, use uma versão branca do símbolo somente depois de sua atualização e validação. A sombra deve permanecer atrás do G e das palavras, com contraste suficiente para separar a marca do fundo, mas sem formar uma borda pesada.
 
 ### Não fazer
 
-Não estique, comprima, incline, contorne, aplique sombra, troque as cores, altere a proporção, remova partes do símbolo ou acrescente textos ao arquivo oficial. Não use o logo para sugerir que o GitHub, o Google ou o AppSheet são marcas da Kaffa Zig Gestão.
+Não estique, comprima, incline, contorne, recorte, redesenhe ou altere a proporção do logo. Não troque as cores do G, não remova o pingo coral do “i”, não retire o til azul de “Gestão” e não aplique uma sombra que escureça as letras. Não acrescente checkmarks, setas, linhas decorativas, ciano ou azul-claro ao logo institucional.
 
 ## 9. Aplicação nos aplicativos
 
 Para um app da linha Kaffa Zig Gestão:
 
-- use o símbolo quadrado como ícone quando o espaço for pequeno;
-- use o logo horizontal na página Sobre, nos materiais de apresentação e em imagens de divulgação;
+- use o G grande como ícone quando o espaço for pequeno;
+- use o logo horizontal na página Sobre, nos materiais de apresentação e nas imagens de divulgação;
 - mantenha o nome do produto em destaque, por exemplo, **Auditoria Agenda**;
 - use o rodapé `Criado por Kaffa Zig Gestão com IAs` em apresentações e posts;
 - na página Sobre de cada instalação, informe o crédito real de quem configurou o app;
-- não use a conta Google de origem como se fosse crédito institucional.
+- não use a conta Google de origem como crédito institucional.
+
+O logo institucional identifica a empresa criadora. O produto pode ter uma identidade complementar própria, mas não deve deformar ou misturar o G institucional com ícones de calendário, checklist ou outras imagens funcionais.
 
 ## 10. Aplicação na Auditoria Agenda
 
-A Auditoria Agenda é um produto da Kaffa Zig Gestão. Seu símbolo específico pode continuar usando calendário e checklist, enquanto o logo institucional identifica a empresa criadora.
+A Auditoria Agenda é um produto da Kaffa Zig Gestão. Ela organiza eventos e tarefas, que devem continuar sendo apresentados de forma clara e separada no produto.
 
 Uma composição recomendada para capa é:
 
@@ -137,11 +139,11 @@ Uma composição recomendada para capa é:
 [ícone Auditoria Agenda]  Auditoria Agenda
                            Organização para agir
 
-[logo Kaffa Zig Gestão]
+[logo Kaffa Zig Gestão aprovado]
 Criado por Kaffa Zig Gestão com IAs
 ```
 
-O produto pode manter a identidade azul-marinho, azul elétrico, coral e ciano usada nos materiais da Auditoria Agenda, mas o logo institucional novo usa somente azul-marinho institucional e coral. Marca institucional e marca de produto devem ser reconhecíveis sem competir entre si.
+O produto pode manter azul-marinho, azul elétrico, coral e ciano em seus elementos funcionais. O logo institucional, entretanto, deve usar somente azul-marinho, coral e branco.
 
 ## 11. Comunicação para gestão de projetos
 
@@ -171,22 +173,25 @@ No plano gratuito do AppSheet usado neste projeto, não é possível exigir logi
 
 | Verificação | Pergunta |
 |---|---|
-| Logo | O arquivo está proporcional e legível? |
-| Cores | O azul-marinho domina e os acentos estão sendo usados com moderação? |
+| Arquivo | Está sendo usado o PNG aprovado ou um vetor já validado? |
+| G grande | O símbolo permanece como elemento principal? |
+| Cores | O G mantém azul-marinho e coral originais? |
+| Wordmark | “Kaffa Zig” e “Gestão” estão completos e legíveis? |
+| Acentos | O pingo do “i” está coral e o til de “Gestão” está azul? |
+| Sombra | A sombra está atrás dos elementos e não corta ou escurece letras? |
 | Texto | Uma pessoa fora da área de tecnologia entenderá a mensagem? |
 | Produto | Está claro se o exemplo é evento, tarefa ou os dois? |
 | Crédito | A assinatura editorial e o crédito da instalação estão corretos? |
 | Segurança | Há algum dado pessoal, senha ou token visível? |
-| App | O link e o nome do produto estão corretos? |
 
 ## 14. Ativos relacionados
 
+- `logo_final_G_cores_originais_sombras_preservadas.png`
+- `logo_final_G_cores_originais.png`
+- `logo_final_G_e_wordmark_sombra_unificada.png`
 - `logo_kaffa_zig_gestao_principal.svg`
 - `logo_kaffa_zig_gestao_simbolo.svg`
 - `logo_kaffa_zig_gestao_simbolo_branco.svg`
-- `logo_kaffa_zig_gestao_principal_clean.png`
-- `logo_kaffa_zig_gestao_simbolo_clean.png`
-- `logo_kaffa_zig_gestao_branco_clean.png`
 - `GUIA_DIFERENCIAR_EVENTO_TAREFA.md`
 - `APRESENTACAO_LINKEDIN_DIDATICA.md`
 
