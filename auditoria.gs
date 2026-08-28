@@ -77,6 +77,11 @@ function sincronizarBidirecional() {
  * O gatilho deve ser criado pela conta dona do Calendar, Tasks e Sheets.
  */
 function configurarSincronizacaoAutomatica() {
+  // Execute esta função manualmente no editor para solicitar a autorização dos gatilhos.
+  ScriptApp.requireScopes(ScriptApp.AuthMode.FULL, [
+    'https://www.googleapis.com/auth/script.scriptapp'
+  ]);
+
   var gatilhos = ScriptApp.getProjectTriggers();
   for (var i = 0; i < gatilhos.length; i++) {
     var funcao = gatilhos[i].getHandlerFunction();
