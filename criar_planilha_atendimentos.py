@@ -120,7 +120,7 @@ ws.add_data_validation(hora_validation)
 hora_validation.add(f"B{FIRST_DATA_ROW}:C{LAST_DATA_ROW}")
 
 # Formatação condicional: déficit geral em vermelho; linhas excepcionais em amarelo suave
-ws.conditional_formatting.add("D3", FormulaRule(formula=["D3<0"], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
+ws.conditional_formatting.add("D3", FormulaRule(formula=["D3>0"], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
 ws.conditional_formatting.add(f"A{FIRST_DATA_ROW}:E{LAST_DATA_ROW}", FormulaRule(formula=[f'$A{FIRST_DATA_ROW}="Excepcional"'], fill=PatternFill("solid", fgColor=yellow)))
 
 # Dimensões e acessibilidade no celular
@@ -158,7 +158,7 @@ for row in range(4, 7):
     resumo[f"A{row}"].alignment = resumo[f"B{row}"].alignment = Alignment(vertical="center", wrap_text=True)
     resumo[f"B{row}"].font = Font(bold=True, color=dark)
 resumo["B6"].number_format = "0;[Red]-0;0"
-resumo.conditional_formatting.add("B6", FormulaRule(formula=["B6<0"], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
+resumo.conditional_formatting.add("B6", FormulaRule(formula=["B6>0"], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
 
 resumo["A9"] = "Como usar"
 resumo["A9"].font = Font(bold=True, color=white)
