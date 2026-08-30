@@ -62,7 +62,7 @@ ws["D2"].comment = Comment("Previsão padrão definida em 160 minutos. Pode ser 
 ws["B3"] = f"=SUM(E{FIRST_DATA_ROW}:E{LAST_DATA_ROW})"
 ws["B3"].number_format = "0"
 ws["B3"].fill = PatternFill("solid", fgColor=green)
-ws["D3"] = "=D2-B3"
+ws["D3"] = "=IF(B3<D2,D2-B3,0)"
 ws["D3"].number_format = "0;[Red]-0;0"
 ws["D3"].fill = PatternFill("solid", fgColor=green)
 for cell in ["B2", "D2", "B3", "D3"]:
@@ -172,7 +172,7 @@ resumo["A11"] = "2. Em cada linha, escolha Normal ou Excepcional, informe hora i
 resumo.merge_cells("A12:D12")
 resumo["A12"] = "3. O total de minutos de cada atendimento e a soma geral são calculados automaticamente."
 resumo.merge_cells("A13:D13")
-resumo["A13"] = "4. O saldo é calculado por: previsão de atendimentos − soma de minutos. Saldo negativo aparece em vermelho."
+resumo["A13"] = "4. O déficit mostra apenas os minutos faltantes: se a soma for menor que 160, calcula 160 − soma; se for igual ou maior, mostra 0."
 for row in range(10, 14):
     resumo[f"A{row}"].alignment = Alignment(wrap_text=True, vertical="center")
     resumo.row_dimensions[row].height = 32
