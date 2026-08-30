@@ -87,6 +87,9 @@ for row in range(FIRST_DATA_ROW, LAST_DATA_ROW + 1):
         cell.alignment = Alignment(vertical="center", wrap_text=(col in [1, 4]))
         if row % 2 == 0:
             cell.fill = PatternFill("solid", fgColor=gray)
+    # Campos de texto: força teclado alfabético em aplicativos móveis compatíveis.
+    ws.cell(row, 1).number_format = "@"
+    ws.cell(row, 4).number_format = "@"
     ws.cell(row, 2).number_format = "hh:mm"
     ws.cell(row, 3).number_format = "hh:mm"
     ws.cell(row, 5).value = f'=IF(OR(B{row}="",C{row}=""),"",ROUND((C{row}-B{row})*1440,0))'
