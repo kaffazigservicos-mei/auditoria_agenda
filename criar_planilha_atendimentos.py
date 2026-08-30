@@ -44,7 +44,7 @@ ws["A1"].alignment = Alignment(horizontal="center", vertical="center")
 ws.row_dimensions[1].height = 28
 
 # Campos de cabeçalho / parâmetros
-labels = [("A2", "Data do atendimento"), ("C2", "Previsão total (minutos)"), ("A3", "Soma de minutos"), ("C3", "Saldo / déficit (minutos)")]
+labels = [("A2", "Data do atendimento"), ("C2", "Previsão total (minutos)"), ("A3", "Soma de minutos"), ("C3", "Resultado")]
 for cell, value in labels:
     ws[cell] = value
     ws[cell].font = Font(bold=True, color=dark)
@@ -62,8 +62,8 @@ ws["D2"].comment = Comment("Previsão padrão definida em 160 minutos. Pode ser 
 ws["B3"] = f"=SUM(E{FIRST_DATA_ROW}:E{LAST_DATA_ROW})"
 ws["B3"].number_format = "0"
 ws["B3"].fill = PatternFill("solid", fgColor=green)
-ws["D3"] = "=IF(B3<D2,D2-B3,0)"
-ws["D3"].number_format = "0;[Red]-0;0"
+ws["D3"] = '=IF(B3=0,"",IF(B3<D2,"Déficit de "&(D2-B3)&" min",IF(B3>D2,"Crédito de "&(B3-D2)&" min","Sem crédito ou déficit")))'
+ws["D3"].number_format = "@"
 ws["D3"].fill = PatternFill("solid", fgColor=green)
 for cell in ["B2", "D2", "B3", "D3"]:
     ws[cell].alignment = Alignment(horizontal="center", vertical="center")
@@ -120,8 +120,7 @@ ws.add_data_validation(hora_validation)
 hora_validation.add(f"B{FIRST_DATA_ROW}:C{LAST_DATA_ROW}")
 
 # Formatação condicional: déficit geral em vermelho; linhas excepcionais em amarelo suave
-ws.conditional_formatting.add("D3", FormulaRule(formula=["D3>0"], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
-ws.conditional_formatting.add("B3", FormulaRule(formula=["B3<D2"], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
+ws.conditional_formatting.add("D3", FormulaRule(formula=['LEFT(D3,7)="Déficit"'], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
 ws.conditional_formatting.add(f"A{FIRST_DATA_ROW}:E{LAST_DATA_ROW}", FormulaRule(formula=[f'$A{FIRST_DATA_ROW}="Excepcional"'], fill=PatternFill("solid", fgColor=yellow)))
 
 # Dimensões e acessibilidade no celular
@@ -151,16 +150,15 @@ resumo["A4"] = "Previsão de atendimento (minutos)"
 resumo["B4"] = "=Registros!D2"
 resumo["A5"] = "Soma de minutos registrados"
 resumo["B5"] = "=Registros!B3"
-resumo["A6"] = "Saldo / déficit"
+resumo["A6"] = "Resultado"
 resumo["B6"] = "=Registros!D3"
 for row in range(4, 7):
     resumo[f"A{row}"].fill = PatternFill("solid", fgColor=light_blue)
     resumo[f"B{row}"].fill = PatternFill("solid", fgColor=green)
     resumo[f"A{row}"].alignment = resumo[f"B{row}"].alignment = Alignment(vertical="center", wrap_text=True)
     resumo[f"B{row}"].font = Font(bold=True, color=dark)
-resumo["B6"].number_format = "0;[Red]-0;0"
-resumo.conditional_formatting.add("B6", FormulaRule(formula=["B6>0"], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
-resumo.conditional_formatting.add("B5", FormulaRule(formula=["B5<B4"], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
+resumo["B6"].number_format = "@"
+resumo.conditional_formatting.add("B6", FormulaRule(formula=['LEFT(B6,7)="Déficit"'], fill=PatternFill("solid", fgColor=red_fill), font=Font(color=red_font, bold=True)))
 
 resumo["A9"] = "Como usar"
 resumo["A9"].font = Font(bold=True, color=white)
@@ -172,7 +170,7 @@ resumo["A11"] = "2. Em cada linha, escolha Normal ou Excepcional, informe hora i
 resumo.merge_cells("A12:D12")
 resumo["A12"] = "3. O total de minutos de cada atendimento e a soma geral são calculados automaticamente."
 resumo.merge_cells("A13:D13")
-resumo["A13"] = "4. O déficit mostra apenas os minutos faltantes: se a soma for menor que 160, calcula 160 − soma; se for igual ou maior, mostra 0."
+resumo["A13"] = "4. O resultado mostra “Déficit de X min” quando faltar tempo e “Crédito de X min” quando ultrapassar 160 minutos. Somente o déficit fica vermelho."
 for row in range(10, 14):
     resumo[f"A{row}"].alignment = Alignment(wrap_text=True, vertical="center")
     resumo.row_dimensions[row].height = 32
