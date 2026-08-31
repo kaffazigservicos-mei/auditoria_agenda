@@ -134,6 +134,40 @@ AND([Tipo] = "Tarefa", [Status] = "Concluída")
 
 Se a instalação não quiser importar tarefas concluídas para a planilha, altere `INCLUIR_TAREFAS_CONCLUIDAS` para `false`. Nesse caso, elas não aparecerão nem na `Página1` nem na View de concluídas.
 
+## Estatísticas de distribuição da agenda
+
+A `Página1` também pode ser usada para acompanhar a distribuição do tempo e da quantidade de registros entre três categorias: `Evento único`, `Evento recorrente` e `Tarefa`. A comparação ajuda a distinguir compromissos pontuais, atividades de rotina e ações que precisam ser concluídas.
+
+Os percentuais devem ser calculados sobre o total de registros analisados no período selecionado:
+
+```text
+Percentual da categoria = quantidade da categoria / quantidade total de registros × 100
+```
+
+Uma leitura recomendada é:
+
+| Categoria | Interpretação de gestão | Cor sugerida |
+|---|---|---|
+| Evento único | Compromissos, entregas ou acontecimentos pontuais | Coral `#E8536C` |
+| Evento recorrente | Rotinas e compromissos repetidos | Azul-marinho `#0B1F45` |
+| Tarefa | Ações pendentes, concluídas ou planejadas | Azul intermediário neutro, sem competir com o coral |
+
+A visualização mais adequada para mostrar a participação percentual é o **gráfico de pizza ou rosca**, com o percentual escrito em cada fatia e uma legenda com as três categorias. O **gráfico de barras** é uma alternativa melhor quando se deseja comparar vários períodos, como semanas ou meses. O **gráfico radar** deve ser reservado para uma análise com várias dimensões — por exemplo, quantidade, duração, conclusão e recorrência — e não para uma simples divisão em três categorias, pois pode dificultar a leitura.
+
+A análise não deve tratar uma porcentagem alta de eventos recorrentes como automaticamente positiva. Eventos recorrentes estão associados à rotina e precisam ser observados para que não ocupem grande parte do tempo disponível. O objetivo de gestão é preservar espaço para **estudos, experimentação, planejamento, revisão e comentários** que ajudem a compreender o trabalho e tomar decisões melhores.
+
+No Google Sheets, a tabela-resumo pode ser montada com `CONT.SE` ou `COUNTIF`, conforme o idioma da planilha. Exemplo conceitual:
+
+```text
+Evento único       = CONT.SE(coluna_tipo; "Evento único")
+Evento recorrente  = CONT.SE(coluna_tipo; "Evento recorrente")
+Tarefa             = CONT.SE(coluna_tipo; "Tarefa")
+Total              = soma das três categorias
+Percentual         = categoria / total
+```
+
+O gráfico deve usar exclusivamente os dados reais da `Página1`, exibir os percentuais e informar o período analisado. Não se deve preencher categorias vazias com números fictícios. Para uma análise de tempo, recomenda-se complementar a quantidade de registros com a duração dos eventos e indicar separadamente as tarefas sem prazo.
+
 ## Duas formas de cadastrar eventos e tarefas
 
 A Auditoria Agenda aceita dois caminhos de cadastro. A pessoa pode começar pelo **AppSheet**, usando o botão `+`, ou pode criar diretamente no **Google Calendar** e no **Google Tasks**. Nos dois casos, a sincronização leva o registro para a `Página1` e o torna visível no outro ambiente.
@@ -218,15 +252,16 @@ Se o computador mostrar o nome novo, mas o celular continuar com o nome antigo n
 ## Instalação
 
 1. Crie uma planilha com a aba `Página1`.
-2. Copie `auditoria.gs` para um arquivo `.gs` no Apps Script.
+2. Copie `auditoria.gs` para um arquivo `.gs` no Apps Script; o nome local pode continuar sendo `Código.gs`.
 3. Copie `appsscript.json` para o manifesto do mesmo projeto.
 4. Associe o Apps Script a um projeto Google Cloud controlado pela mesma conta Google.
 5. Ative a Google Tasks API no Google Cloud.
 6. Autorize o projeto executando `exportarAgendaAuditoria`.
 7. Confirme que eventos e tarefas chegaram à `Página1`.
-8. Execute `configurarSincronizacaoAutomatica` uma vez.
-9. Confira em **Gatilhos** se existe uma única execução de `exportarAgendaAuditoria` aproximadamente a cada cinco minutos.
-10. Crie o app AppSheet a partir da planilha e configure as Slices e Views.
+8. No Apps Script, abra **Gatilhos → Adicionar gatilho** e selecione `exportarAgendaAuditoria` como função, com execução baseada em tempo aproximadamente a cada cinco minutos.
+9. Crie o app AppSheet a partir da planilha e configure as Slices e Views.
+
+A configuração automática do intervalo é feita pela tela **Gatilhos**. Não é necessário clicar em **Implantar** e não é necessário executar uma função separada para criar o gatilho.
 
 O manifesto atual usa chamadas REST autenticadas para o Tasks. Não é necessário encontrar `Tasks API` na lista de Serviços avançados do Apps Script.
 
@@ -241,6 +276,12 @@ https://www.googleapis.com/auth/script.scriptapp
 ```
 
 A conta que executa o Apps Script e cria o gatilho precisa ter acesso de edição à planilha, ao Calendar e ao Tasks.
+
+## Revisão semanal dos logs e relatórios de erro
+
+Foi configurada uma revisão semanal para segunda-feira, às 9h, no fuso `America/Sao_Paulo`. A revisão deve examinar os registros de execução e os relatórios de erro disponíveis, agrupando falhas por causa, destacando IDs obsoletos, permissões, execuções incompletas e tendências de repetição. Quando houver dados da `Página1`, a revisão pode incluir a distribuição percentual entre eventos únicos, eventos recorrentes e tarefas.
+
+A revisão semanal não substitui o gatilho do Apps Script. O gatilho executa a sincronização aproximadamente a cada cinco minutos; a revisão semanal avalia a qualidade das execuções e dos erros acumulados. Se o log não estiver disponível para leitura automática, ele deve ser anexado para análise.
 
 ## Guia para novos usuários
 
