@@ -78,6 +78,25 @@ function toCandidate_(headers, row, sourceRow, richTextRow) {
     ? ""
     : normalizeDriveUrl_(row[resumeColumn], richTextRow && richTextRow[resumeColumn]);
 
+  const scores = {
+    education: score(get("Formação Pontos IA")),
+    experience: score(get("Experiência Pontos IA")),
+    skills: score(get("Habilidades Pontos IA")),
+    languages: score(get("Idioma Pontos IA")),
+  };
+  const scoreValues = Object.values(scores);
+  const hasAnyScore = scoreValues.some(value => value !== null);
+  const criteriaTotal = scoreValues.every(value => value !== null)
+    ? scoreValues.reduce((sum, value) => sum + value, 0)
+    : null;
+  const storedTotal = score(get("Pontuação IA", "Pontução IA"));
+  const totalScore = storedTotal === null || (storedTotal === 0 && criteriaTotal !== null && criteriaTotal > 0)
+    ? criteriaTotal
+    : storedTotal;
+  const recommendation = hasAnyScore
+    ? normalizeRecommendation_(get("Recomendação IA"))
+    : "NAO_RECOMENDADO";
+
   return {
     id: get("row_number") || sourceRow,
     submittedAt: get("Data da Submissão", "Carimbo de data/hora"),
@@ -85,14 +104,9 @@ function toCandidate_(headers, row, sourceRow, richTextRow) {
     email: get("E-mail", "Endereço de email"),
     phone: get("Número de telefone"),
     resumeUrl: resumeUrl,
-    totalScore: score(get("Pontução IA")),
-    recommendation: normalizeRecommendation_(get("Recomendação IA")),
-    scores: {
-      education: score(get("Formação Pontos IA")),
-      experience: score(get("Experiência Pontos IA")),
-      skills: score(get("Habilidades Pontos IA")),
-      languages: score(get("Idioma Pontos IA")),
-    },
+    totalScore: totalScore,
+    recommendation: recommendation,
+    scores: scores,
     justifications: {
       education: get("Justificava Formação IA"),
       experience: get("Experiência Justificativa IA"),
