@@ -69,7 +69,9 @@ function toCandidate_(headers, row, sourceRow, richTextRow) {
   };
 
   const score = value => {
-    const parsed = Number(String(value || "").replace(",", ".").replace(/[^0-9.-]/g, ""));
+    const text = String(value ?? "").trim();
+    if (!text) return null;
+    const parsed = Number(text.replace(",", ".").replace(/[^0-9.-]/g, ""));
     return Number.isFinite(parsed) ? parsed : null;
   };
   const keywordText = get("Justificativa Competências IA");
@@ -90,9 +92,11 @@ function toCandidate_(headers, row, sourceRow, richTextRow) {
     ? scoreValues.reduce((sum, value) => sum + value, 0)
     : null;
   const storedTotal = score(get("Pontuação IA", "Pontução IA"));
-  const totalScore = storedTotal === null || (storedTotal === 0 && criteriaTotal !== null && criteriaTotal > 0)
-    ? criteriaTotal
-    : storedTotal;
+  const totalScore = !hasAnyScore
+    ? 0
+    : criteriaTotal !== null
+      ? criteriaTotal
+      : storedTotal;
   const recommendation = hasAnyScore
     ? normalizeRecommendation_(get("Recomendação IA"))
     : "NAO_RECOMENDADO";
