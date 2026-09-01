@@ -146,7 +146,7 @@ function normalizeRecommendation_(value) {
   if (normalized.indexOf("PARCIAL") !== -1) return "PARCIALMENTE_RECOMENDADO";
   if (normalized.indexOf("NAO") !== -1 || normalized.indexOf("NÃO") !== -1) return "NAO_RECOMENDADO";
   if (normalized.indexOf("RECOMEND") !== -1) return "RECOMENDADO";
-  return "EM_AVALIACAO";
+  return "NAO_RECOMENDADO";
 }
 
 function extractKeywords_(value, label) {
@@ -172,12 +172,11 @@ function buildDashboard_(candidates) {
     total: total,
     average: average,
     recommended: counts.RECOMENDADO || 0,
-    pending: counts.EM_AVALIACAO || 0,
+    notRecommended: counts.NAO_RECOMENDADO || 0,
     distribution: [
       { key: "RECOMENDADO", label: "Recomendados", description: "Aderência alta à vaga", count: counts.RECOMENDADO || 0 },
       { key: "PARCIALMENTE_RECOMENDADO", label: "Parcialmente recomendados", description: "Pontos a validar", count: counts.PARCIALMENTE_RECOMENDADO || 0 },
       { key: "NAO_RECOMENDADO", label: "Não recomendados", description: "Aderência insuficiente", count: counts.NAO_RECOMENDADO || 0 },
-      { key: "EM_AVALIACAO", label: "Em avaliação", description: "Análise pendente", count: counts.EM_AVALIACAO || 0 },
     ],
   };
 }
